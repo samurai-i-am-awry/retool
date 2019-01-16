@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Results from "./pages/Results";
 import Details from "./pages/Details";
 import NoMatch from "./pages/NoMatch";
+import Search from "./pages/Search"; 
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/home" component={Home} />
           <Route exact path="/results" component={Results} />
           <Route exact path="/details" component={Details} />
+          <Route exact path="/search" component={Search} />
           <Route component={NoMatch} />
         </Switch>
       </div>
