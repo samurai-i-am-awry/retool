@@ -25,7 +25,9 @@ const styles = theme => ({
   },
   image: {
     width: 400,
-    height: 400
+    height: 400,
+    margin: 'auto',
+    display: "block"
   },
   img: {
     margin: "auto",
@@ -43,7 +45,12 @@ const styles = theme => ({
   },
   text: {
     padding: "30px"
+  },
+  centering: {
+    marginLeft: 'auto',
+    marginRight: 'auto'
   }
+
 });
 
 function ItemInfo(props) {
@@ -52,14 +59,14 @@ function ItemInfo(props) {
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Grid container spacing={16}>
-          <Grid item>
-            <ButtonBase className={classes.image}>
+          <Grid item className={classes.centering}>
+            {/* <ButtonBase className={classes.image}> */}
               <img
-                className={classes.img}
+                className={classes.image}
                 alt="complex"
                 src={dummyValues.image}
               />
-            </ButtonBase>
+            {/* </ButtonBase> */}
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={16}>

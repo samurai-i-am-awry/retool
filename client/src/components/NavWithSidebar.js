@@ -30,7 +30,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import SearchResults from "./SearchResults";
 import ItemInfo from "./ItemInfo";
-//import Videos from "./Videos";
+import VideoResults from "./VideoResults";
+
+import AddTool from "./AddTool";
 
 const drawerWidth = 240;
 
@@ -116,12 +118,15 @@ class PersistentDrawerLeft extends React.Component {
         return (
           <div>
             <ItemInfo />
-            
+            <VideoResults />
           </div>
         );
         break;
       case "profile":
-        return <SearchResults />;
+        return <AddTool />;
+        break;
+      case "toolentry":
+        return <AddTool />;
         break;
     }
   };
