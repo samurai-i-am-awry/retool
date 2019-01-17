@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import LockIcon from "@material-ui/icons/LockOutlined";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -41,56 +39,78 @@ const styles = theme => ({
     marginTop: theme.spacing.unit
   },
   submit: {
-    marginTop: (theme.spacing.unit * 3),
-    backgroundColor: 'turquoise',
-    color: 'black'
+    marginTop: theme.spacing.unit * 3,
+    backgroundColor: "turquoise",
+    color: "black"
   },
   logo: {
-    height: '75px',
-    width: '75px'
+    height: "75px",
+    width: "75px"
   },
   button: {
-    color: 'black'
+    color: "black"
   }
 });
 
-function SignIn(props) {
-  const { classes } = props;
+class SignIn extends React.Component {
 
-  return (
-    <main className={classes.main}>
-      <CssBaseline />
-      <Paper className={classes.paper}>
-        
-          <img className={classes.logo} src="ReTool.png"/>
-   
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input
-              name="password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-          </FormControl>
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: "",
+      password: ""
+    };
+  }
+
+  handleInputChange = event => {
+    let value = event.target.value;
+    const name = event.target.name;
+
+    if (name === "password") {
+      value = value.substring(0, 15);
+    }
+    this.setState({
+      [name]: value
+    });
+  };
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <main className={classes.main}>
+        <CssBaseline />
+        <Paper className={classes.paper}>
+          <img className={classes.logo} src="ReTool.png" />
+
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form className={classes.form}>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="email">Email Address</InputLabel>
+              <Input id="email" name="email" autoComplete="email" autoFocus />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <Input
+                name="password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+            </FormControl>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              className={classes.submit}
+            >
+              <Link to="/home">Sign in</Link>
+            </Button>
+          </form>
           <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            className={classes.submit}
-          ><Link to="/home">
-            Sign in</Link>
-          </Button>
-        </form>
-        <Button
             type="button"
             fullWidth
             variant="contained"
@@ -98,9 +118,10 @@ function SignIn(props) {
           >
             <Link to="/signup">Sign Up</Link>
           </Button>
-      </Paper>
-    </main>
-  );
+        </Paper>
+      </main>
+    );
+  }
 }
 
 SignIn.propTypes = {
