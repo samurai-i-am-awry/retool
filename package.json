@@ -27,9 +27,15 @@
     "if-env": "^1.0.4",
     "material-ui": "^0.20.2",
     "material-ui-icons": "^1.0.0-beta.36",
+<<<<<<< HEAD
     "mongoose": "^5.4.4",
     "react-input-autosize": "^2.2.1",
     "react-select": "^2.2.0",
+=======
+    "mongoose": "^5.3.16",
+    "react-select": "^2.2.0",
+    "react-swipeable-views": "^0.13.0",
+>>>>>>> d2ec9376e236ba57b747ff054fcdb3590d464c07
     "react-youtube": "^7.8.0",
     "yarn": "^1.12.3",
     "ytsearch": "^1.0.4"

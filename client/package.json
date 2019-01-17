@@ -10,10 +10,15 @@
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.2",
     "react-router-dom": "^4.3.1",
+    "react-select": "^2.2.0",
     "axios": "^0.18.0",
     "react-youtube": "^7.8.0",
+<<<<<<< HEAD
     "react-input-autosize": "^2.2.1",
     "react-select": "^2.2.0"
+=======
+    "react-swipeable-views": "^0.13.0"
+>>>>>>> d2ec9376e236ba57b747ff054fcdb3590d464c07
   },
   "scripts": {
     "start": "react-scripts start",
