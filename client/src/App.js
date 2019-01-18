@@ -9,6 +9,7 @@ import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import ToolEntry from "./pages/ToolEntry";
+import TestTool from "./pages/TestTool";
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/toolentry" component={ToolEntry} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/test" component={TestTool
+          } />
           <Route component={NoMatch} />
         </Switch>
       </div>
