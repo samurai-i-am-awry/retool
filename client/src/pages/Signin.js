@@ -9,6 +9,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
+import auth from "../auth/initAuth";
 
 const styles = theme => ({
   main: {
@@ -53,7 +54,6 @@ const styles = theme => ({
 });
 
 class SignIn extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -63,13 +63,20 @@ class SignIn extends React.Component {
     };
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(
+      this.state
+    );
+
+    auth.login(this.state.email, this.state.password);
+  };
+
   handleInputChange = event => {
     let value = event.target.value;
     const name = event.target.name;
 
-    if (name === "password") {
-      value = value.substring(0, 15);
-    }
     this.setState({
       [name]: value
     });
@@ -106,18 +113,11 @@ class SignIn extends React.Component {
               fullWidth
               variant="contained"
               className={classes.submit}
+              onClick={this.handleSubmit}
             >
-              <Link to="/home">Sign in</Link>
+              Sign in
             </Button>
           </form>
-          <Button
-            type="button"
-            fullWidth
-            variant="contained"
-            className={classes.submit}
-          >
-            <Link to="/signup">Sign Up</Link>
-          </Button>
         </Paper>
       </main>
     );

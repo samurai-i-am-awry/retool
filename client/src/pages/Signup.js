@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import auth from "../auth/initAuth"
+import auth from "../auth/initAuth";
 
 const styles = theme => ({
   appBar: {
@@ -63,13 +62,27 @@ class Signup extends React.Component {
     };
   }
 
+  handleSubmit = e => {
+    e.preventDefault();
+
+    console.log(
+      this.state
+    );
+
+    auth.signup(
+      this.state.email,
+      this.state.password,
+      this.state.firstName,
+      this.state.lastName,
+      this.state.zip,
+      this.state.phone
+    );
+  };
+
   handleInputChange = event => {
     let value = event.target.value;
     const name = event.target.name;
 
-    if (name === "password") {
-      value = value.substring(0, 15);
-    }
     this.setState({
       [name]: value
     });
@@ -168,10 +181,10 @@ class Signup extends React.Component {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={this.handleNext}
+                  onClick={this.handleSubmit}
                   className={classes.button}
                 >
-                  <Link to="/home">Continue</Link>
+                  Sign Up
                 </Button>
               </div>
             </React.Fragment>
