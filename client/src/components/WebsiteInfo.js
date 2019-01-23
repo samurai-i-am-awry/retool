@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Developer from "./Developer";
 import classNames from "classnames";
+import Card from "@material-ui/core/Card";
 
 const developers = [
   {
@@ -29,9 +30,9 @@ const developers = [
   },
   {
     name: "Raynor ",
-    email: "mihir.k25@gmail.com",
-    image: "Nathan.jpg",
-    github: "https://github.com/mihirkothari25"
+    email: "rfisher708@me.com",
+    image: "Raynor.jpg",
+    github: "https://github.com/RaynorFisher"
   }
 ];
 
@@ -42,7 +43,7 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing.unit * 2,
     margin: "auto",
-    maxWidth: 1000
+    maxWidth: 1150
   },
   image: {
     width: 300,
@@ -83,6 +84,11 @@ const styles = theme => ({
   },
   cardGrid: {
     padding: `${theme.spacing.unit * 8}px 0`
+  },
+  card: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column"
   }
 });
 
@@ -132,9 +138,13 @@ function WebsiteInfo(props) {
         <div className={classNames(classes.layout, classes.cardGrid)}>
           <Grid container spacing={40}>
             {developers.map(developer => (
+              <Grid item xs={12} sm={12} md={4} lg={3} justify='center'>
+              <div className={classes.card}> 
               <div className={classes.centering}>
                 <Developer details={developer} />
               </div>
+              </div>
+              </Grid>
             ))}
           </Grid>
         </div>

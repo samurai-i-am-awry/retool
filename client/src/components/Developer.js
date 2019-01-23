@@ -43,8 +43,10 @@ const styles = theme => ({
   },
   image: {
     borderRadius: "50%",
-    width: "200px",
-    height: "200px"
+    width: "220px",
+    height: "220px",
+    marginLeft: 'auto',
+    marginRight: 'auto'
   }
 });
 
