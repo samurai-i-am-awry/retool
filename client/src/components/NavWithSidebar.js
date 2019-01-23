@@ -31,6 +31,10 @@ import Menu from "@material-ui/core/Menu";
 import SearchResults from "./SearchResults";
 import ItemInfo from "./ItemInfo";
 import VideoResults from "./VideoResults";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import ToolboxContainer from "./ToolboxContainer";
+import WebsiteInfo from "./WebsiteInfo";
+import AlertIcon from "@material-ui/icons/";
 
 import AddTool from "./AddTool";
 
@@ -38,6 +42,7 @@ const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
+    flexGrow: 1,
     display: "flex"
   },
   appBar: {
@@ -90,12 +95,28 @@ const styles = theme => ({
       duration: theme.transitions.duration.enteringScreen
     }),
     marginLeft: 0
+  },
+  toolBar: {
+    display: "flex",
+    justifyContent: "space-between"
+  },
+  accountIcon: {
+    justifyContent: "space-around"
   }
 });
 
 class PersistentDrawerLeft extends React.Component {
   state = {
-    open: false
+    open: false,
+    anchorEl: null
+  };
+
+  handleMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
   };
 
   handleDrawerOpen = () => {
@@ -128,6 +149,12 @@ class PersistentDrawerLeft extends React.Component {
       case "toolentry":
         return <AddTool />;
         break;
+      case "toolbox":
+        return <ToolboxContainer />;
+        break;
+      case "about":
+        return <WebsiteInfo />;
+        break;
     }
   };
 
@@ -147,7 +174,7 @@ class PersistentDrawerLeft extends React.Component {
         break;
       case "Toolbox":
         return (
-          <Link to="/profile">
+          <Link to="/toolbox">
             <ListItem button key={option}>
               <ListItemIcon>
                 <ToolboxIcon />
@@ -159,7 +186,7 @@ class PersistentDrawerLeft extends React.Component {
         break;
       case "History":
         return (
-          <Link to="/profile">
+          <Link to="/history">
             <ListItem button key={option}>
               <ListItemIcon>
                 <HistoryIcon />
@@ -174,7 +201,27 @@ class PersistentDrawerLeft extends React.Component {
 
   render() {
     const { classes, theme } = this.props;
-    const { open } = this.state;
+    const { auth, anchorEl } = this.state;
+    const openSide = this.state.open;
+    const openMenu = Boolean(anchorEl);
+    // const links = [
+    //   <Link to="/contact">
+    //     <ListItem button key={option}>
+    //       <ListItemIcon>
+    //         <ContactIcon />
+    //       </ListItemIcon>
+    //       <ListItemText primary={option} />
+    //     </ListItem>
+    //   </Link>,
+    //   <Link to="/about">
+    //     <ListItem button key={option}>
+    //       <ListItemIcon>
+    //         <AboutIcon />
+    //       </ListItemIcon>
+    //       <ListItemText primary={option} />
+    //     </ListItem>
+    //   </Link>
+    // ];
 
     return (
       <div className={classes.root}>
@@ -182,28 +229,63 @@ class PersistentDrawerLeft extends React.Component {
         <AppBar
           position="fixed"
           className={classNames(classes.appBar, {
-            [classes.appBarShift]: open
+            [classes.appBarShift]: openSide
           })}
         >
-          <Toolbar disableGutters={!open}>
+          <Toolbar disableGutters={!openSide} className={classes.toolBar}>
             <IconButton
               color="inherit"
               aria-label="Open drawer"
               onClick={this.handleDrawerOpen}
-              className={classNames(classes.menuButton, open && classes.hide)}
+              className={classNames(
+                classes.menuButton,
+                openSide && classes.hide
+              )}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
+            <Typography variant="title" color="inherit" noWrap>
               Re-Tool
             </Typography>
+            <div>
+              <IconButton
+                color="inherit"
+                aria-owns={openSide ? "menu-appbar" : undefined}
+                aria-haspopup="true"
+                onClick={this.handleMenu}
+                color="inherit"
+                className={classes.accountIcon}
+              >
+                <Badge badgeContent={17} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right"
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right"
+                }}
+                open={openMenu}
+                onClose={this.handleClose}
+              >
+                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                <MenuItem onClick={this.handleClose}>My account</MenuItem>
+              </Menu>
+            </div>
           </Toolbar>
         </AppBar>
+
         <Drawer
           className={classes.drawer}
           variant="persistent"
           anchor="left"
-          open={open}
+          open={openSide}
           classes={{
             paper: classes.drawerPaper
           }}
@@ -225,19 +307,27 @@ class PersistentDrawerLeft extends React.Component {
           </List>
           <Divider />
           <List>
-            {["Contact", "About"].map((text, index) => (
-              <ListItem button key={text}>
+            <Link to="/contact">
+              <ListItem button key="contact">
                 <ListItemIcon>
-                  {index % 2 === 0 ? <ContactIcon /> : <HelpIcon />}
+                  <ContactIcon />
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary="Contact" />
               </ListItem>
-            ))}
+            </Link>
+            <Link to="/about">
+              <ListItem button key="about">
+                <ListItemIcon>
+                  <HelpIcon />
+                </ListItemIcon>
+                <ListItemText primary="About" />
+              </ListItem>
+            </Link>
           </List>
         </Drawer>
         <main
           className={classNames(classes.content, {
-            [classes.contentShift]: open
+            [classes.contentShift]: openSide
           })}
         >
           <div className={classes.drawerHeader} />
