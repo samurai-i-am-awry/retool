@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,7 +8,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
-import auth from "../auth/initAuth";
 
 const styles = theme => ({
   main: {
@@ -56,31 +54,24 @@ const styles = theme => ({
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       email: "",
       password: ""
     };
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-
-    console.log(
-      this.state
-    );
-
-    auth.login(this.state.email, this.state.password);
-  };
-
   handleInputChange = event => {
     let value = event.target.value;
     const name = event.target.name;
-
     this.setState({
       [name]: value
     });
   };
+
+  login(event) {
+    event.preventDefault();
+    this.props.auth.login(this.state.email, this.state.password);
+  }
 
   render() {
     const { classes } = this.props;
@@ -90,14 +81,19 @@ class SignIn extends React.Component {
         <CssBaseline />
         <Paper className={classes.paper}>
           <img className={classes.logo} src="ReTool.png" />
-
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
           <form className={classes.form}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input id="email" name="email" autoComplete="email" autoFocus />
+              <Input
+                id="email"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={this.handleInputChange}
+              />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>
@@ -106,6 +102,7 @@ class SignIn extends React.Component {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={this.handleInputChange}
               />
             </FormControl>
             <Button
@@ -113,7 +110,7 @@ class SignIn extends React.Component {
               fullWidth
               variant="contained"
               className={classes.submit}
-              onClick={this.handleSubmit}
+              onClick={this.login.bind(this)}
             >
               Sign in
             </Button>

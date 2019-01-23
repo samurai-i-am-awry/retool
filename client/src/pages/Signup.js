@@ -9,7 +9,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import auth from "../auth/initAuth";
 
 const styles = theme => ({
   appBar: {
@@ -51,7 +50,6 @@ const styles = theme => ({
 class Signup extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       firstName: "",
       lastName: "",
@@ -62,14 +60,8 @@ class Signup extends React.Component {
     };
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-
-    console.log(
-      this.state
-    );
-
-    auth.signup(
+  signup() {
+    this.props.auth.signup(
       this.state.email,
       this.state.password,
       this.state.firstName,
@@ -77,7 +69,7 @@ class Signup extends React.Component {
       this.state.zip,
       this.state.phone
     );
-  };
+  }
 
   handleInputChange = event => {
     let value = event.target.value;
@@ -181,7 +173,7 @@ class Signup extends React.Component {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={this.handleSubmit}
+                  onClick={this.signup.bind(this)}
                   className={classes.button}
                 >
                   Sign Up

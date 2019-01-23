@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Router, Switch } from "react-router-dom";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
 import App from "./App";
 import Auth from "./auth/Auth";
 import Callback from "./components/Callback/Callback";
@@ -16,15 +16,15 @@ import ToolEntry from "./pages/ToolEntry";
 
 const auth = new Auth();
 
-const handleAuthentication = ({ location }) => {
-  if (/access_token|id_token|error/.test(location.hash)) {
+const handleAuthentication = (nextState, replace) => {
+  if (/access_token|id_token|error/.test(nextState.location.hash)) {
     auth.handleAuthentication();
   }
 };
 
 export const makeMainRoutes = () => {
   return (
-    <Router history={history}>
+    <BrowserRouter history={history} component={App}>
       <div>
         <Switch>
           <Route
@@ -82,6 +82,6 @@ export const makeMainRoutes = () => {
           <Route component={NoMatch} />
         </Switch>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 };
