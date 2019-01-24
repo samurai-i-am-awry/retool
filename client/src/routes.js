@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
+import About from "./pages/About";
 import App from "./App";
 import Auth from "./auth/Auth";
 import Callback from "./components/Callback/Callback";
@@ -12,6 +13,7 @@ import Results from "./pages/Results";
 import Search from "./pages/Search";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import TestTool from "./pages/TestTool";
 import ToolEntry from "./pages/ToolEntry";
 import Toolbox from "./pages/Toolbox";
 
