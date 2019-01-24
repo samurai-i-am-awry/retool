@@ -79,7 +79,7 @@ function VideoResults(props) {
       <div className={classNames(classes.layout, classes.cardGrid)}>
         <Grid container spacing={40}>
           {cards.map(card => (
-            <Grid item key={card} xs={12} sm={12} md={6} lg={4} justify='center'>
+            <Grid item key={card} xs={12} sm={6} md={6} lg={4} justify='center'>
                <Card className={classes.card}> 
                <div className={classes.centering}>
                 <VideoCard />
