@@ -244,9 +244,11 @@ class PersistentDrawerLeft extends React.Component {
             >
               <MenuIcon />
             </IconButton>
+            <Link to="/home">
             <Typography variant="title" color="inherit" noWrap>
               Re-Tool
             </Typography>
+            </Link>
             <div>
               <IconButton
                 color="inherit"

@@ -15,6 +15,10 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     margin: "auto",
     maxWidth: 1000
+  },
+  button: {
+    marginTop: theme.spacing.unit * 3,
+    marginLeft: theme.spacing.unit
   }
 });
 
@@ -27,8 +31,21 @@ function AddTool(props) {
           Add a Tool
         </Typography>
         <Grid container spacing={24}>
+
+        <Grid item xs={12}>
+            <TextField
+              id="toolName"
+              name="toolName"
+              label="Enter a tool Name"
+              fullWidth
+              autoComplete=""
+            />
+          </Grid>
           <Grid item xs={12} sm={6}>
-            <ChooseTool />
+            <ChooseTool type="tool"/>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <ChooseTool type="condition"/>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -50,7 +67,7 @@ function AddTool(props) {
               autoComplete=""
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
             <TextField
               id="minRentalTime"
               name="minRentalTime"
@@ -59,7 +76,7 @@ function AddTool(props) {
               autoComplete=""
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
             <TextField
               required
               id="pictureURL"
