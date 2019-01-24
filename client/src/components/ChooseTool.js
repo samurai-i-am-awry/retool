@@ -15,7 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
-const suggestions = [
+const suggestionsTool = [
   { label: "Circular Saw" },
   { label: "Clamps" },
   { label: "Combination Wrench" },
@@ -31,6 +31,17 @@ const suggestions = [
   { label: "Shop Vacuum" },
   { label: "Weed Wacker" },
   { label: "Wrench" },
+].map(suggestion => ({
+  value: suggestion.label,
+  label: suggestion.label,
+}));
+
+const suggestionsCondition = [
+  { label: "Brand New" },
+  { label: "Like New" },
+  { label: "Very Good" },
+  { label: "Good" },
+  { label: "Acceptable" },
 ].map(suggestion => ({
   value: suggestion.label,
   label: suggestion.label,
@@ -222,22 +233,11 @@ class IntegrationReactSelect extends React.Component {
           <Select
             classes={classes}
             styles={selectStyles}
-            options={suggestions}
+            options={this.props.type === "tool" ? suggestionsTool : suggestionsCondition}
             components={components}
             value={this.state.single}
             onChange={this.handleChange('single')}
-            placeholder="Enter a tool"
-            isClearable
-          />
-          <div className={classes.divider} />
-          <Select
-            classes={classes}
-            styles={selectStyles}
-            options={suggestions}
-            components={components}
-            value={this.state.single}
-            onChange={this.handleChange('single')}
-            placeholder="Condition"
+            placeholder={this.props.type === "tool" ? "Enter a tool" : "Condition"}
             isClearable
           />
           </NoSsr>

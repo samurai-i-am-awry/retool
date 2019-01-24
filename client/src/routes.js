@@ -13,6 +13,7 @@ import Search from "./pages/Search";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import ToolEntry from "./pages/ToolEntry";
+import Toolbox from "./pages/Toolbox";
 
 const auth = new Auth();
 
@@ -72,6 +73,17 @@ export const makeMainRoutes = () => {
             path="/search"
             render={props => <Search auth={auth} {...props} />}
           />
+          <Route
+            exact
+            path="/test"
+            render={props => <TestTool auth={auth} {...props} />}
+          />
+          <Route
+            exact
+            path="/toolbox"
+            render={props => <Toolbox auth={auth} {...props} />}
+          />
+          <Route exact path="/about" component={About} />
           <Route
             path="/callback"
             render={props => {
