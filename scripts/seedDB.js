@@ -10,14 +10,15 @@ mongoose.connect(
 
 const toolSeed = [
   {
-    type: "Hammer", 
+    tool_type: "Hammer",
     condition: "Fair", 
-    price: 12, 
-    manufacturer: "Home Depot", 
-    min_rental_time: 2, 
-    picture_url: "lkajdlaj;fja.aldjalfj", 
-    deposit: 10, 
-    date: new Date(Date.now())
+    manufacturer: "Home Depot",
+    min_rental_time: "hour",
+    price_per_hour: "two",
+    picture_url: "ladjfa;ldfa",
+    deposit: "one",
+    phone_number: "twentythree",
+    date: "test"
   }
   
 ];
