@@ -34,6 +34,7 @@ function AddressForm() {
         </Grid>
         <Grid item xs={12}>
           <TextField
+            required
             id="email"
             name="email"
             label="Email"
