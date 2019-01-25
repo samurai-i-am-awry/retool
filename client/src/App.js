@@ -8,7 +8,9 @@ class App extends Component {
 
     return (
       <div>
-        {!isAuthenticated() && <FrontPage auth={this.props.auth} />}
+        {!isAuthenticated() && (
+          <FrontPage auth={this.props.auth} {...this.props} />
+        )}
         {isAuthenticated() && <Home />}
       </div>
     );

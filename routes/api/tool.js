@@ -2,7 +2,8 @@ const router = require("express").Router();
 const toolsController = require("../../controllers/toolsController");
 
 // Matches with "/api/books"
-router.route("/")
+router
+  .route("/")
   .get(toolsController.findAll)
   .post(toolsController.create);
 

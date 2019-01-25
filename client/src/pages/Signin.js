@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -51,7 +51,7 @@ const styles = theme => ({
   }
 });
 
-class SignIn extends React.Component {
+class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
