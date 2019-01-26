@@ -35,7 +35,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import ToolboxContainer from "./ToolboxContainer";
 import WebsiteInfo from "./WebsiteInfo";
 import AlertIcon from "@material-ui/icons/";
-
+import SearchBar from "./SearchBar"; 
 import AddTool from "./AddTool";
 
 const drawerWidth = 240;
@@ -154,6 +154,9 @@ class PersistentDrawerLeft extends React.Component {
         break;
       case "about":
         return <WebsiteInfo />;
+        break;
+      case "search":
+        return <SearchBar />;
         break;
     }
   };
