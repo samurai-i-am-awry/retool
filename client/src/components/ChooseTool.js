@@ -238,7 +238,7 @@ class IntegrationReactSelect extends React.Component {
             components={components}
             value={this.state.single}
             onChange={this.handleChange('single')}
-            placeholder={this.props.type === "tool" ? "Enter a tool" : "Condition"}
+            placeholder={this.props.type === "tool" ? "Select a tool" : "Condition"}
             isClearable
           />
           </NoSsr>
