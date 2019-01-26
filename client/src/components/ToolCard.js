@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -43,41 +43,55 @@ const styles = theme => ({
   }
 });
 
-function ToolCard(props) {
-  const { classes, theme } = props;
-  console.log(props.details);
-  return (
-    <Card className={classes.card}>
-      <CardMedia className={classes.cover} image={props.details.image} />
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Grid item xs container spacing={16}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1">
-                {props.details.name}
-              </Typography>
-              <Typography gutterBottom>{props.details.description}</Typography>
-              <Typography color="textSecondary">Renter Email: {props.details.renter_email}</Typography>
+class ToolCard extends Component {
+  
+  render() {
+    const { classes, theme } = this.props;
+    return (
+      <Card className={classes.card}>
+        <CardMedia className={classes.cover} image="saw.jpg" />
+        <div className={classes.details}>
+          <CardContent className={classes.content}>
+            <Grid item xs container spacing={16}>
+              <Grid item xs>
+                <Typography gutterBottom variant="subtitle1">
+                  {this.props.details.tool_type}
+                </Typography>
+
+                <Typography gutterBottom>
+                  This is my saw. It is like new. Cuts wood well. Rent me Rent
+                  me Rent me Rent me Rent me Rent me Rent me Rent me Rent me
+                </Typography>
+                <Typography color="textSecondary">
+                  Renter Email: {this.props.details.renter_email}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="subtitle1" className={classes.row}>
+                  Times Rented: N/A
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography className={classes.row} variant="subtitle1">
+                  Price/Hour: ${this.props.details.price_per_hour}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography
+                  className={classes.remove}
+                  onClick={() => this.props.remove(this.props.details._id)}
+                  style={{ cursor: "pointer" }}
+                >
+                  Remove
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Typography variant="subtitle1" className={classes.row}>
-                Times Rented: {props.details.times_rented}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography className={classes.row} variant="subtitle1">
-                Price/Hour: ${props.details.price_per_hour}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography className={classes.remove} style={{ cursor: "pointer" }}>Remove</Typography>
-            </Grid>
-          </Grid>
-        </CardContent>
-        <div className={classes.controls} />
-      </div>
-    </Card>
-  );
+          </CardContent>
+          <div className={classes.controls} />
+        </div>
+      </Card>
+    );
+  }
 }
 
 ToolCard.propTypes = {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -6,64 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import ToolCard from "./ToolCard";
-
-const dummyValues = [{
-  image: "saw.jpg",
-  name: "Nathan's Saw",
-  description:
-    "This is my saw. It is like new.  Cuts wood well. Rent me Rent me Rent me Rent me Rent me Rent me Rent me Rent me Rent me ",
-  email: "nate@gmail.com",
-  price_per_hour: 6,
-  condition: "Acceptable",
-  deposit: 200,
-  min_rental_time: 5,
-  manufacturer: "Makita",
-  times_rented: 8,
-  rating: 4,
-  renter_email: "nathaniel@gmail.com"
-},{
-    image: "saw.jpg",
-    name: "Andrea's Saw",
-    description:
-      "This is my saw. It is like new.  Cuts wood well. Rent me Rent me Rent me Rent me Rent me Rent me Rent me Rent me Rent me ",
-    email: "nate@gmail.com",
-    price_per_hour: 6,
-    condition: "Acceptable",
-    deposit: 200,
-    min_rental_time: 5,
-    manufacturer: "Makita",
-    times_rented: 8,
-    rating: 4,
-    renter_email: "nathaniel@gmail.com"
-  },{
-    image: "saw.jpg",
-    name: "Mihir's Saw",
-    description:
-      "This is my saw. It is like new.  Cuts wood well. Rent me Rent me Rent me Rent me Rent me Rent me Rent me Rent me Rent me ",
-    email: "nate@gmail.com",
-    price_per_hour: 6,
-    condition: "Acceptable",
-    deposit: 200,
-    min_rental_time: 5,
-    manufacturer: "Makita",
-    times_rented: 8,
-    rating: 4,
-    renter_email: "nathaniel@gmail.com"
-  },{
-    image: "saw.jpg",
-    name: "Raynor's Saw",
-    description:
-      "This is my saw. It is like new.  Cuts wood well. Rent me Rent me Rent me Rent me Rent me Rent me Rent me Rent me Rent me ",
-    email: "nate@gmail.com",
-    price_per_hour: 6,
-    condition: "Acceptable",
-    deposit: 200,
-    min_rental_time: 5,
-    manufacturer: "Makita",
-    times_rented: 8,
-    rating: 4,
-    renter_email: "nathaniel@gmail.com"
-  }];
+import API from "../utils/API";
 
 const styles = theme => ({
   root: {
@@ -103,6 +46,58 @@ const styles = theme => ({
   }
 });
 
+class ToolboxContainer extends Component {
+  state = {
+    tools: []
+  };
+
+  componentDidMount() {
+    this.loadTools();
+  }
+
+
+  loadTools = () => {
+    API.getTools()
+      .then(res => this.setState({ tools: res.data }))
+      .catch(err => console.log(err));
+  };
+
+
+  deleteTool = id => {
+    API.deleteTool(id)
+      .then(res => this.loadTools())
+      .catch(err => console.log(err));
+  };
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root}>
+        <Paper className={classes.paper}>
+          {this.state.tools.length ? (
+            <div>
+              {this.state.tools.map(tool => (
+                <div className={classes.centering}>
+                  <ToolCard details={tool} remove={this.deleteTool}/>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <h3>No Tools to Display</h3>
+          )}
+        </Paper>
+      </div>
+    );
+  }
+}
+
+ToolboxContainer.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(ToolboxContainer);
+
+/* 
 function ToolboxContainer(props) {
   const { classes } = props;
   return (
@@ -122,4 +117,4 @@ ToolboxContainer.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ToolboxContainer);
+export default withStyles(styles)(ToolboxContainer); */
