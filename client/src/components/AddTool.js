@@ -34,10 +34,11 @@ class AddTool extends React.Component {
     deposit: "",
     phone: "",
     tool: "",
-    condition: ""
+    condition: "",
+    description: ""
   };
 
-/*   handleNameChange = e => {
+  /*   handleNameChange = e => {
     this.setState({
       name: e.target.value
     });
@@ -81,8 +82,14 @@ class AddTool extends React.Component {
     this.setState({
       condition: conditionValue.value
     });
-  };
-  buttonClick = (event) => {
+  }
+    handleDescriptionChange = e => {
+      this.setState({
+        description: e.target.value
+      });
+    }
+
+  buttonClick = event => {
     console.log("Name: " + this.state.name);
     console.log("Tool: " + this.state.tool);
     console.log("Condition: " + this.state.condition);
@@ -102,8 +109,10 @@ class AddTool extends React.Component {
       this.state.minRentalTime &&
       this.state.pictureURL &&
       this.state.deposit &&
-      this.state.phone
+      this.state.phone &&
+      this.state.description
     ) {
+      console.log("saving");
       API.saveTool({
         tool_type: this.state.tool,
         condition: this.state.condition,
@@ -112,6 +121,7 @@ class AddTool extends React.Component {
         min_rental_time: this.state.minRentalTime,
         picture_url: this.state.pictureURL,
         deposit: this.state.deposit,
+        description: this.state.description,
         phone_number: this.state.phone
       })
         .then(res => console.log(res))
@@ -124,7 +134,6 @@ class AddTool extends React.Component {
     return (
       <React.Fragment>
         <Paper className={classes.paper}>
-
           <Typography variant="h6" gutterBottom>
             Add a Tool
           </Typography>
@@ -220,9 +229,22 @@ class AddTool extends React.Component {
                 onChange={this.handlePhoneChange}
               />
             </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                id="description"
+                name="description"
+                fullWidth
+                placeholder="Enter a tool description"
+                multiline={true}
+                rows={2}
+                rowsMax={4}
+                value={this.state.description}
+                onChange={this.handleDescriptionChange}
+              />
+            </Grid>
           </Grid>
           <div className={classes.buttons}>
-          
             <Button
               variant="contained"
               color="primary"

@@ -59,8 +59,7 @@ class ToolCard extends Component {
                 </Typography>
 
                 <Typography gutterBottom>
-                  This is my saw. It is like new. Cuts wood well. Rent me Rent
-                  me Rent me Rent me Rent me Rent me Rent me Rent me Rent me
+                  {this.props.details.description}
                 </Typography>
                 <Typography color="textSecondary">
                   Renter Email: {this.props.details.renter_email}

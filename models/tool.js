@@ -12,6 +12,7 @@ const toolSchema = new Schema({
   picture_url: { type: String},
   deposit: { type: String},
   phone_number: { type: String},
+  description: { type: String},
   date: { type: Date, default: Date.now }
 });
 

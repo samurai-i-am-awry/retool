@@ -18,6 +18,7 @@ const toolSeed = [
     picture_url: "ladjfa;ldfa",
     deposit: "one",
     phone_number: "twentythree",
+    description: "This is a tool",
     date: "test"
   }
   
