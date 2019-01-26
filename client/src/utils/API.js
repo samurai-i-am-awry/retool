@@ -5,7 +5,7 @@ const KEY = "AIzaSyAeSWk8gxMd0AyLuJOEv-n_ZGpKf0cc9PM";
 
 export default {
   // Gets all books
-  getTool: function() {
+  getTools: function() {
     return axios.get("/api/tool");
   },
   // Gets the book with the given id
