@@ -21,7 +21,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import AccountIcon from "@material-ui/icons/AccountCircle";
 import ToolboxIcon from "@material-ui/icons/Build";
-import HistoryIcon from "@material-ui/icons/History";
+import AddIcon from "@material-ui/icons/Add";
 import HelpIcon from "@material-ui/icons/Help";
 import ContactIcon from "@material-ui/icons/Message";
 import Badge from "@material-ui/core/Badge";
@@ -187,12 +187,12 @@ class PersistentDrawerLeft extends React.Component {
           </Link>
         );
         break;
-      case "History":
+      case "Add A Tool":
         return (
-          <Link to="/history">
+          <Link to="/toolentry">
             <ListItem button key={option}>
               <ListItemIcon>
-                <HistoryIcon />
+                <AddIcon />
               </ListItemIcon>
               <ListItemText primary={option} />
             </ListItem>
@@ -306,7 +306,7 @@ class PersistentDrawerLeft extends React.Component {
           </div>
           <Divider />
           <List>
-            {["Profile", "Toolbox", "History"].map((text, index) =>
+            {["Profile", "Toolbox", "Add A Tool"].map((text, index) =>
               this.selectIcon(text)
             )}
           </List>
