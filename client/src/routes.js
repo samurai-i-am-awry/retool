@@ -15,6 +15,7 @@ import Signup from "./pages/Signup";
 import ToolEntry from "./pages/ToolEntry";
 import Toolbox from "./pages/Toolbox";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const auth = new Auth();
 
@@ -84,7 +85,11 @@ export const makeMainRoutes = () => {
             path="/about-testing"
             render={props => <About auth={auth} {...props} />}
           />
-          
+          <Route
+            exact
+            path="/contact"
+            render={props => <Contact auth={auth} {...props} />}
+          />
           <Route exact path="/about" component={About} />
           <Route
             path="/callback"
