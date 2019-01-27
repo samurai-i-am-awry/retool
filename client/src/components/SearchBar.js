@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   paper: {
@@ -23,7 +24,54 @@ const styles = theme => ({
   }
 });
 
-function Search(props) {
+class SearchBar extends React.Component {
+  state = {
+    tool: ""
+  };
+  handleToolChange = toolValue => {
+    this.setState({
+      tool: toolValue.value
+    });
+  };
+
+  render() {
+    const { classes, theme } = this.props;
+
+    return (
+      <React.Fragment>
+        <Paper className={classes.paper}>
+          <Typography variant="h6" gutterBottom>
+            Search
+          </Typography>
+          <Grid container spacing={24}>
+            <Grid item xs={12}>
+              <ChooseTool type="tool" onSelect={this.handleToolChange}/>
+            </Grid>
+          </Grid>
+          <div className={classes.buttons}>
+          <Link to={"/results/" + this.state.tool}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+            >
+              Search
+            </Button>
+            </Link>
+          </div>
+        </Paper>
+      </React.Fragment>
+    );
+  }
+}
+
+SearchBar.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(SearchBar);
+
+/* function Search(props) {
   const { classes } = props;
   return (
     <React.Fragment>
@@ -41,6 +89,7 @@ function Search(props) {
             variant="contained"
             color="primary"
             className={classes.button}
+            onClick={handleSearch}
           >
             Search
           </Button>
@@ -54,4 +103,4 @@ function Search(props) {
     classes: PropTypes.object.isRequired
   };
 
-  export default withStyles(styles)(Search);
+  export default withStyles(styles)(Search); */

@@ -7,7 +7,6 @@ class Profile extends Component {
         return (
             <div>
                 <NavWithSidebar current="profile"/>
-                <h1>Profile</h1>
             </div>
         );
     }
