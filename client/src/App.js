@@ -7,7 +7,6 @@ import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import ToolEntry from "./pages/ToolEntry";
-import TestTool from "./pages/TestTool";
 import Toolbox from "./pages/Toolbox";
 import About from "./pages/About";
 
