@@ -8,6 +8,9 @@ export default {
   getTools: function() {
     return axios.get("/api/tool");
   },
+  searchTools: function(query) {
+    return axios.get("/api/tool/search/" + query);
+  },
   // Gets the book with the given id
   getTool: function(id) {
     return axios.get("/api/tool/" + id);

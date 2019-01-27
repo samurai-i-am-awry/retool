@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import NavWithSidebar from "../components/NavWithSidebar";
-import FrontPage from "./FrontPage"
+import FrontPage from "./FrontPage";
 
 class Home extends Component {
   render() {
@@ -12,8 +12,11 @@ class Home extends Component {
         )}
         {isAuthenticated() && (
           <div>
-            <NavWithSidebar auth={this.props.auth} {...this.props} current="home" />
-            <h1>Homepage</h1>
+            <NavWithSidebar
+              auth={this.props.auth}
+              {...this.props}
+              current="home"
+            />
           </div>
         )}
       </div>

@@ -52,12 +52,12 @@ export const makeMainRoutes = () => {
           />
           <Route
             exact
-            path="/results"
+            path="/results/:query?"
             render={props => <Results auth={auth} {...props} />}
           />
           <Route
             exact
-            path="/details"
+            path="/details/:id?"
             render={props => <Details auth={auth} {...props} />}
           />
           <Route

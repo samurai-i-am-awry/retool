@@ -8,6 +8,13 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findByType: function(req, res) {
+    db.Tool
+      .find({tool_type: req.params.tool_type})
+      .sort({ date: -1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   findById: function(req, res) {
     db.Tool.findById(req.params.id)
       .then(dbModel => res.json(dbModel))

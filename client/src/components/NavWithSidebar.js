@@ -37,6 +37,7 @@ import WebsiteInfo from "./WebsiteInfo";
 import AlertIcon from "@material-ui/icons/";
 import SearchBar from "./SearchBar"; 
 import AddTool from "./AddTool";
+import UserInfo from "./UserInfo";
 
 const drawerWidth = 240;
 
@@ -130,21 +131,21 @@ class PersistentDrawerLeft extends React.Component {
   getMainContent = current => {
     switch (current) {
       case "home":
-        return <SearchResults />;
+        return <SearchBar />;
         break;
       case "results":
-        return <SearchResults />;
+        return <SearchResults tool={this.props.tool} />;
         break;
       case "details":
         return (
           <div>
-            <ItemInfo />
-            <VideoResults />
+            <ItemInfo tool={this.props.tool}/>
+            <VideoResults tool={this.props.tool}/>
           </div>
         );
         break;
       case "profile":
-        return <AddTool />;
+        return <UserInfo />;
         break;
       case "toolentry":
         return <AddTool />;

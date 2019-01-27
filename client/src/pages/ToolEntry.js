@@ -6,7 +6,6 @@ class Profile extends Component {
     return (
       <div>
         <NavWithSidebar current="toolentry" />
-        <h1>ToolEntry</h1>
       </div>
     );
   }

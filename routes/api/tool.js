@@ -14,4 +14,8 @@ router
   .put(toolsController.update)
   .delete(toolsController.remove);
 
+  router
+  .route("/search/:tool_type")
+  .get(toolsController.findByType);
+
 module.exports = router;
