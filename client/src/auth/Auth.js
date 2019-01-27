@@ -2,11 +2,14 @@ import auth0 from "auth0-js";
 import history from "../history";
 
 export default class Auth {
+  userProfile;
+
   auth0 = new auth0.WebAuth({
     domain: "mkothari.auth0.com",
     clientID: "dtTz_Es2NA_pZfAiRO8gCh6lxnbmsYUN",
     redirectUri: "http://localhost:3000/callback",
-    responseType: "token id_token"
+    responseType: "token id_token",
+    scope: "openid profile email read:users"
   });
 
   constructor() {
@@ -16,6 +19,7 @@ export default class Auth {
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
+    this.getProfile = this.getProfile.bind(this);
   }
 
   login(username, password) {
@@ -39,7 +43,7 @@ export default class Auth {
         connection: "re-tool",
         email,
         password,
-        user_metadata: { firstName, lastName, zip, phone }
+        user_metadata: { given_name: firstName, family_name: lastName, address: zip, phone_number: phone }
       },
       err => {
         if (err) {
@@ -103,6 +107,7 @@ export default class Auth {
     localStorage.removeItem("access_token");
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
+    this.userProfile = null;
     // navigate to the home route
     history.replace("/home");
   }
@@ -113,4 +118,14 @@ export default class Auth {
     let expiresAt = JSON.parse(localStorage.getItem("expires_at"));
     return new Date().getTime() < expiresAt;
   }
+
+  getProfile(cb) {
+    this.auth0.client.userInfo(localStorage.getItem("access_token"), (err, profile) => {
+      if (profile) {
+        this.userProfile = profile;
+      }
+      cb(err, profile);
+    });
+  }
+
 }
