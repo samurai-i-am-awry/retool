@@ -6,8 +6,7 @@ class Details extends Component {
     render() {
         return (
             <div>
-                <NavWithSidebar current="details"/>
-                <h1>Details</h1>
+                <NavWithSidebar current="details" tool={this.props.match.params.id}/>
             </div>
         );
     }

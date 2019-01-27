@@ -7,7 +7,6 @@ class About extends Component {
         return (
             <div>
                 <NavWithSidebar current="about"/>
-                <h1>About</h1>
             </div>
         );
     }

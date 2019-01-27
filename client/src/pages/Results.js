@@ -6,8 +6,7 @@ class Results extends Component {
     render() {
         return (
             <div>
-                <NavWithSidebar current="results"/>
-                <h1>Results</h1>
+                <NavWithSidebar current="results" tool={this.props.match.params.query}/>
             </div>
         );
     }

@@ -7,7 +7,6 @@ class Home extends Component {
         return (
             <div>
                 <NavWithSidebar current="home"/>
-                <h1>Homepage</h1>
             </div>
         );
     }
