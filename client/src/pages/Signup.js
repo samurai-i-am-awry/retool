@@ -47,7 +47,7 @@ const styles = theme => ({
   }
 });
 
-class Signup extends React {
+class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
