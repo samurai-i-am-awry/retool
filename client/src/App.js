@@ -12,6 +12,7 @@ class App extends Component {
       console.log(idTokenPayload);
     }
   }
+
   render() {
     const { isAuthenticated } = this.props.auth;
 
