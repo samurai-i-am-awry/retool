@@ -2,14 +2,12 @@ import auth0 from "auth0-js";
 import history from "../history";
 
 export default class Auth {
-  userProfile;
-
   auth0 = new auth0.WebAuth({
     domain: "mkothari.auth0.com",
     clientID: "dtTz_Es2NA_pZfAiRO8gCh6lxnbmsYUN",
     redirectUri: "http://localhost:3000/callback",
     responseType: "token id_token",
-    scope: "openid profile email read:users"
+    scope: "openid profile"
   });
 
   constructor() {
@@ -25,7 +23,7 @@ export default class Auth {
   login(username, password) {
     this.auth0.login(
       { realm: "re-tool", username, password },
-      (err, authResult) => {
+      err => {
         if (err) {
           console.log(err);
           alert(
@@ -43,7 +41,12 @@ export default class Auth {
         connection: "re-tool",
         email,
         password,
-        user_metadata: { given_name: firstName, family_name: lastName, address: zip, phone_number: phone }
+        user_metadata: {
+          firstName,
+          lastName,
+          zip,
+          phone
+        }
       },
       err => {
         if (err) {
@@ -57,7 +60,7 @@ export default class Auth {
 
         this.auth0.login(
           { realm: "re-tool", username: email, password },
-          (err, authResult) => {
+          err => {
             if (err) {
               console.log(err);
               alert(
@@ -107,7 +110,6 @@ export default class Auth {
     localStorage.removeItem("access_token");
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
-    this.userProfile = null;
     // navigate to the home route
     history.replace("/home");
   }
@@ -119,13 +121,16 @@ export default class Auth {
     return new Date().getTime() < expiresAt;
   }
 
-  getProfile(cb) {
-    this.auth0.client.userInfo(localStorage.getItem("access_token"), (err, profile) => {
+  getProfile() {
+    if (!localStorage.getItem("access_token")) {
+      console.log("Access Token must exist to fetch profile");
+      return;
+    }
+    let accessToken = localStorage.getItem("access_token");
+    this.auth0.client.userInfo(accessToken, function(err, profile) {
       if (profile) {
-        this.userProfile = profile;
+        console.log(profile);
       }
-      cb(err, profile);
     });
   }
-
 }

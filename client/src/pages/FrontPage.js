@@ -52,7 +52,7 @@ class FrontPage extends Component {
 
     return (
       <div>
-        {isAuthenticated() && <Home />}
+        {isAuthenticated() && <Home auth={this.props.auth} {...this.props}/>}
         {!isAuthenticated() && (
           <main className={classes.main}>
             <Paper className={classes.paper}>
