@@ -4,6 +4,7 @@ import About from "./pages/About";
 import App from "./App";
 import Auth from "./auth/Auth";
 import Callback from "./components/Callback/Callback";
+import Contact from "./pages/Contact";
 import Details from "./pages/Details";
 import history from "./history";
 import Home from "./pages/Home";
@@ -27,7 +28,7 @@ const handleAuthentication = (nextState, replace) => {
 
 export const makeMainRoutes = () => {
   return (
-    <BrowserRouter >
+    <BrowserRouter>
       <div>
         <Switch>
           <Route
@@ -77,26 +78,19 @@ export const makeMainRoutes = () => {
           />
           <Route
             exact
-            path="/test"
-            render={props => <TestTool auth={auth} {...props} />}
-          />
-          <Route
-            exact
             path="/toolbox"
             render={props => <Toolbox auth={auth} {...props} />}
           />
           <Route
             exact
-            path="/test"
-            render={props => <TestTool auth={auth} {...props} />}
-          />
-
-          <Route
-            exact
             path="/about-testing"
             render={props => <About auth={auth} {...props} />}
           />
-
+          <Route
+            exact
+            path="/contact"
+            render={props => <Contact auth={auth} {...props} />}
+          />
           <Route exact path="/about" component={About} />
           <Route
             path="/callback"

@@ -38,6 +38,7 @@ import AlertIcon from "@material-ui/icons/";
 import SearchBar from "./SearchBar";
 import AddTool from "./AddTool";
 import UserInfo from "./UserInfo";
+import ContactForm from "./ContactForm";
 
 const drawerWidth = 240;
 
@@ -158,6 +159,9 @@ class PersistentDrawerLeft extends React.Component {
         break;
       case "search":
         return <SearchBar />;
+        break;
+      case "contact":
+        return <ContactForm />;
         break;
     }
   };
