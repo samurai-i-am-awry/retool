@@ -1,29 +1,39 @@
 import React, { Component } from "react";
 import Home from "./pages/Home";
 import FrontPage from "./pages/FrontPage";
-import Results from "./pages/Results";
-import Details from "./pages/Details";
-import NoMatch from "./pages/NoMatch";
-import Profile from "./pages/Profile";
-import Search from "./pages/Search";
-import ToolEntry from "./pages/ToolEntry";
-import TestTool from "./pages/TestTool";
-import Toolbox from "./pages/Toolbox";
-import About from "./pages/About";
+import decode from "jwt-decode";
 
 const styles = theme => ({
 
 });
 
 class App extends Component {
+<<<<<<< HEAD
   
+=======
+  componentDidMount() {
+    if (localStorage.getItem("id_token")) {
+      let idTokenPayload = decode(localStorage.getItem("id_token"));
+      console.log(idTokenPayload);
+    }
+  }
+
+>>>>>>> 8e31a1dc9f70340f6de57ff857a1b24f469278cf
   render() {
     const { isAuthenticated } = this.props.auth;
     const { classes } = this.props;
     return (
+<<<<<<< HEAD
       <div >
         {!isAuthenticated() && <FrontPage auth={this.props.auth} />}
         {isAuthenticated() && <Home />}
+=======
+      <div>
+        {!isAuthenticated() && (
+          <FrontPage auth={this.props.auth} {...this.props} />
+        )}
+        {isAuthenticated() && <Home auth={this.props.auth} {...this.props} />}
+>>>>>>> 8e31a1dc9f70340f6de57ff857a1b24f469278cf
       </div>
     );
   }

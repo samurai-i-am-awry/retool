@@ -35,9 +35,10 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import ToolboxContainer from "./ToolboxContainer";
 import WebsiteInfo from "./WebsiteInfo";
 import AlertIcon from "@material-ui/icons/";
-import SearchBar from "./SearchBar"; 
+import SearchBar from "./SearchBar";
 import AddTool from "./AddTool";
 import UserInfo from "./UserInfo";
+import ContactForm from "./ContactForm";
 
 const drawerWidth = 240;
 
@@ -139,8 +140,8 @@ class PersistentDrawerLeft extends React.Component {
       case "details":
         return (
           <div>
-            <ItemInfo tool={this.props.tool}/>
-            <VideoResults tool={this.props.tool}/>
+            <ItemInfo tool={this.props.tool} />
+            <VideoResults tool={this.props.tool} />
           </div>
         );
         break;
@@ -158,6 +159,9 @@ class PersistentDrawerLeft extends React.Component {
         break;
       case "search":
         return <SearchBar />;
+        break;
+      case "contact":
+        return <ContactForm />;
         break;
     }
   };
@@ -249,23 +253,14 @@ class PersistentDrawerLeft extends React.Component {
               <MenuIcon />
             </IconButton>
             <Link to="/home">
-            <Typography variant="title" color="inherit" noWrap>
-              Re-Tool
-            </Typography>
+              <Typography variant="title" color="inherit" noWrap>
+                Re-Tool
+              </Typography>
             </Link>
             <div>
-              <IconButton
-                color="inherit"
-                aria-owns={openSide ? "menu-appbar" : undefined}
-                aria-haspopup="true"
-                onClick={this.handleMenu}
-                color="inherit"
-                className={classes.accountIcon}
-              >
-                <Badge badgeContent={17} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
+              <Typography variant="title" color="inherit" noWrap>
+                Name
+              </Typography>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
