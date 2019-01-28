@@ -1,8 +1,10 @@
 import React from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
+import About from "./pages/About";
 import App from "./App";
 import Auth from "./auth/Auth";
 import Callback from "./components/Callback/Callback";
+import Contact from "./pages/Contact";
 import Details from "./pages/Details";
 import history from "./history";
 import Home from "./pages/Home";
@@ -12,10 +14,9 @@ import Results from "./pages/Results";
 import Search from "./pages/Search";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import TestTool from "./pages/TestTool";
 import ToolEntry from "./pages/ToolEntry";
 import Toolbox from "./pages/Toolbox";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
 
 const auth = new Auth();
 
@@ -27,7 +28,7 @@ const handleAuthentication = (nextState, replace) => {
 
 export const makeMainRoutes = () => {
   return (
-    <BrowserRouter history={history} component={App}>
+    <BrowserRouter>
       <div>
         <Switch>
           <Route

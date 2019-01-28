@@ -6,7 +6,8 @@ export default class Auth {
     domain: "mkothari.auth0.com",
     clientID: "dtTz_Es2NA_pZfAiRO8gCh6lxnbmsYUN",
     redirectUri: "http://localhost:3000/callback",
-    responseType: "token id_token"
+    responseType: "token id_token",
+    scope: "openid profile email"
   });
 
   constructor() {
@@ -16,12 +17,13 @@ export default class Auth {
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
+    this.getProfile = this.getProfile.bind(this);
   }
 
   login(username, password) {
     this.auth0.login(
       { realm: "re-tool", username, password },
-      (err, authResult) => {
+      err => {
         if (err) {
           console.log(err);
           alert(
@@ -39,7 +41,12 @@ export default class Auth {
         connection: "re-tool",
         email,
         password,
-        user_metadata: { firstName, lastName, zip, phone }
+        user_metadata: {
+          firstName,
+          lastName,
+          zip,
+          phone
+        }
       },
       err => {
         if (err) {
@@ -53,7 +60,7 @@ export default class Auth {
 
         this.auth0.login(
           { realm: "re-tool", username: email, password },
-          (err, authResult) => {
+          err => {
             if (err) {
               console.log(err);
               alert(
@@ -112,5 +119,18 @@ export default class Auth {
     // access token's expiry time
     let expiresAt = JSON.parse(localStorage.getItem("expires_at"));
     return new Date().getTime() < expiresAt;
+  }
+
+  getProfile() {
+    if (!localStorage.getItem("access_token")) {
+      console.log("Access Token must exist to fetch profile");
+      return;
+    }
+    let accessToken = localStorage.getItem("access_token");
+    this.auth0.client.userInfo(accessToken, function(err, profile) {
+      if (profile) {
+        console.log(profile);
+      }
+    });
   }
 }

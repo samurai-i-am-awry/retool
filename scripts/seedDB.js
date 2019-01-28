@@ -3,15 +3,12 @@ const db = require("../models");
 
 // This file empties the Books collection and inserts the books below
 
-mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://localhost/retool"
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/retool");
 
 const toolSeed = [
   {
     tool_type: "Hammer",
-    condition: "Fair", 
+    condition: "Fair",
     manufacturer: "Home Depot",
     min_rental_time: "hour",
     price_per_hour: "two",
@@ -21,11 +18,9 @@ const toolSeed = [
     description: "This is a tool",
     date: "test"
   }
-  
 ];
 
-db.Tool
-  .remove({})
+db.Tool.remove({})
   .then(() => db.Tool.collection.insertMany(toolSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
