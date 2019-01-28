@@ -11,12 +11,17 @@ import TestTool from "./pages/TestTool";
 import Toolbox from "./pages/Toolbox";
 import About from "./pages/About";
 
+const styles = theme => ({
+
+});
+
 class App extends Component {
+  
   render() {
     const { isAuthenticated } = this.props.auth;
-
+    const { classes } = this.props;
     return (
-      <div>
+      <div >
         {!isAuthenticated() && <FrontPage auth={this.props.auth} />}
         {isAuthenticated() && <Home />}
       </div>

@@ -21,7 +21,15 @@ const styles = theme => ({
   button: {
     marginTop: theme.spacing.unit * 3,
     marginLeft: theme.spacing.unit
+  },
+  centering: {
+    margin: "auto"
   }
+  // background: {
+  //   backgroundImage: "url(homeBackground.png)",
+  //   height: "100%",
+  //   width: "100%"
+  // }
 });
 
 class SearchBar extends React.Component {
@@ -38,7 +46,8 @@ class SearchBar extends React.Component {
     const { classes, theme } = this.props;
 
     return (
-      <React.Fragment>
+
+        <div className={classes.centering}>
         <Paper className={classes.paper}>
           <Typography variant="h6" gutterBottom>
             Search
@@ -60,7 +69,8 @@ class SearchBar extends React.Component {
             </Link>
           </div>
         </Paper>
-      </React.Fragment>
+        </div>
+
     );
   }
 }

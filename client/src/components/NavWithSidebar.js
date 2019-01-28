@@ -88,7 +88,7 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth
+    marginLeft: -drawerWidth,
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -340,6 +340,7 @@ class PersistentDrawerLeft extends React.Component {
 
           {this.getMainContent(this.props.current)}
         </main>
+        
       </div>
     );
   }
