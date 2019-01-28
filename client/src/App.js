@@ -5,8 +5,6 @@ import decode from "jwt-decode";
 
 class App extends Component {
   componentDidMount() {
-    this.props.auth.getProfile();
-
     if (localStorage.getItem("id_token")) {
       let idTokenPayload = decode(localStorage.getItem("id_token"));
       console.log(idTokenPayload);
