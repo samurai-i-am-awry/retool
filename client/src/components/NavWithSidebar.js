@@ -129,7 +129,7 @@ class PersistentDrawerLeft extends React.Component {
     this.setState({ open: false });
   };
 
-  getMainContent = current => {
+  getMainContent = (current, userProfile) => {
     switch (current) {
       case "home":
         return <SearchBar />;
@@ -146,7 +146,7 @@ class PersistentDrawerLeft extends React.Component {
         );
         break;
       case "profile":
-        return <UserInfo />;
+        return <UserInfo user={userProfile}/>;
         break;
       case "toolentry":
         return <AddTool />;
@@ -230,6 +230,10 @@ class PersistentDrawerLeft extends React.Component {
     //     </ListItem>
     //   </Link>
     // ];
+    this.props.auth.getProfile();
+    let userProfile = JSON.parse(localStorage.getItem("profile"));
+    console.log(userProfile);
+    const namespace = "https://mkothari:auth0:com/";
 
     return (
       <div className={classes.root}>
@@ -259,7 +263,7 @@ class PersistentDrawerLeft extends React.Component {
             </Link>
             <div>
               <Typography variant="title" color="inherit" noWrap>
-                Name
+                {userProfile[namespace + "firstName"] + " " + userProfile[namespace + "lastName"]}
               </Typography>
               <Menu
                 id="menu-appbar"
@@ -333,7 +337,7 @@ class PersistentDrawerLeft extends React.Component {
         >
           <div className={classes.drawerHeader} />
 
-          {this.getMainContent(this.props.current)}
+          {this.getMainContent(this.props.current, userProfile)}
         </main>
       </div>
     );

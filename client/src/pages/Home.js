@@ -11,13 +11,11 @@ class Home extends Component {
           <FrontPage auth={this.props.auth} {...this.props} />
         )}
         {isAuthenticated() && (
-          <div>
-            <NavWithSidebar
-              auth={this.props.auth}
-              {...this.props}
-              current="home"
-            />
-          </div>
+          <NavWithSidebar
+            auth={this.props.auth}
+            {...this.props}
+            current="home"
+          />
         )}
       </div>
     );

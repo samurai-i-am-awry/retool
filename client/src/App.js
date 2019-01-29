@@ -4,11 +4,6 @@ import FrontPage from "./pages/FrontPage";
 import decode from "jwt-decode";
 
 class App extends Component {
-
-  componentDidMount() {
-    this.props.auth.getProfile();
-  }
-
   render() {
     const { isAuthenticated } = this.props.auth;
 
