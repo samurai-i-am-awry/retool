@@ -4,11 +4,9 @@ import FrontPage from "./pages/FrontPage";
 import decode from "jwt-decode";
 
 class App extends Component {
+
   componentDidMount() {
-    if (localStorage.getItem("id_token")) {
-      let idTokenPayload = decode(localStorage.getItem("id_token"));
-      console.log(idTokenPayload);
-    }
+    this.props.auth.getProfile();
   }
 
   render() {
