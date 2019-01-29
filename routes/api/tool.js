@@ -18,4 +18,12 @@ router
   .route("/search/:tool_type")
   .get(toolsController.findByType);
 
+  router
+  .route("/mytools/:owner_email")
+  .get(toolsController.findByUser);
+
+  router
+  .route("/rent/:id")
+  .put(toolsController.update)
+
 module.exports = router;

@@ -61,6 +61,7 @@ class AddTool extends React.Component {
     tool: "",
     condition: "",
     description: "",
+    owner_email: "",
     open: false
   };
 
@@ -69,6 +70,10 @@ class AddTool extends React.Component {
       name: e.target.value
     });
   }; */
+
+
+
+
   handlePriceChange = e => {
     this.setState({
       pricePerHour: e.target.value
@@ -162,6 +167,7 @@ class AddTool extends React.Component {
       this.state.description
     ) {
       console.log("saving");
+      console.log(this.props.user.email)
       API.saveTool({
         tool_type: this.state.tool,
         condition: this.state.condition,
@@ -171,7 +177,9 @@ class AddTool extends React.Component {
         picture_url: this.state.pictureURL,
         deposit: this.state.deposit,
         description: this.state.description,
-        phone_number: this.state.phone
+        phone_number: this.state.phone,
+        owner_email: this.props.user.email,
+        currently_rented: false
       })
         .then(res => console.log(res))
         .catch(err => console.log(err));

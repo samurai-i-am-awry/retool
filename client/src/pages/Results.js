@@ -6,6 +6,7 @@ class Results extends Component {
     return (
       <div>
         <NavWithSidebar
+          key="results"
           current="results"
           tool={this.props.match.params.query}
         />

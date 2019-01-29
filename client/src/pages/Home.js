@@ -19,6 +19,7 @@ class Home extends Component {
         {isAuthenticated() && (
           <div>
             <NavWithSidebar
+              key="home"
               auth={this.props.auth}
               {...this.props}
               current="home"
@@ -30,18 +31,4 @@ class Home extends Component {
   }
 }
 
-<<<<<<< HEAD
-    render() {
-        const { classes } = this.props;
-        return (
-            <div>
-                <NavWithSidebar current="home"/>
-            </div>
-        );
-    }
-};
-
 export default Home;
-=======
-export default Home;
->>>>>>> 8e31a1dc9f70340f6de57ff857a1b24f469278cf

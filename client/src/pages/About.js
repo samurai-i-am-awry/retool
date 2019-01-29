@@ -5,7 +5,7 @@ class About extends Component {
   render() {
     return (
       <div>
-        <NavWithSidebar current="about" />
+        <NavWithSidebar key="about" current="about" />
       </div>
     );
   }
