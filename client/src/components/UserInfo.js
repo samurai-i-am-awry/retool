@@ -34,14 +34,6 @@ const styles = theme => ({
     }
 }});
 
-const dummyValues = {
-    email: "a@a.com",
-    firstName: "Nate",
-    lastName: "Niesel",
-    zip: "78681",
-    phone: "123456789"
-}
-
 
 
 function SimpleTable(props) {
@@ -60,25 +52,25 @@ function SimpleTable(props) {
               <TableCell component="th" scope="row">
                 <strong>Email:</strong>
               </TableCell>
-              <TableCell align="center">{dummyValues.email}</TableCell>
+              <TableCell align="center">{props.user.email}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
                 <strong>Name:</strong>
               </TableCell>
-              <TableCell align="center">{dummyValues.firstName + " " + dummyValues.lastName}</TableCell>
+              <TableCell align="center">{props.user.name}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
                 <strong>Zipcode:</strong>
               </TableCell>
-              <TableCell align="center">{dummyValues.zip}</TableCell>
+              <TableCell align="center">888888</TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
                 <strong>Phone:</strong>
               </TableCell>
-              <TableCell align="center">{dummyValues.phone}</TableCell>
+              <TableCell align="center">898532798275239</TableCell>
             </TableRow>
         </TableBody>
       </Table>

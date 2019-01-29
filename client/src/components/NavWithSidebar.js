@@ -39,6 +39,7 @@ import SearchBar from "./SearchBar";
 import AddTool from "./AddTool";
 import UserInfo from "./UserInfo";
 import ContactForm from "./ContactForm";
+import decode from "jwt-decode";
 
 const drawerWidth = 240;
 
@@ -89,7 +90,7 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth
+    marginLeft: -drawerWidth,
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -110,8 +111,17 @@ const styles = theme => ({
 class PersistentDrawerLeft extends React.Component {
   state = {
     open: false,
-    anchorEl: null
+    anchorEl: null,
+    payload: {name: ""}
   };
+
+  componentDidMount() {
+    if (localStorage.getItem("id_token")) {
+      let idTokenPayload = decode(localStorage.getItem("id_token"));
+      this.setState({ payload: idTokenPayload})
+      console.log(idTokenPayload)
+    }
+  }
 
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -132,36 +142,36 @@ class PersistentDrawerLeft extends React.Component {
   getMainContent = current => {
     switch (current) {
       case "home":
-        return <SearchBar />;
+        return <SearchBar key={current}/>;
         break;
       case "results":
-        return <SearchResults tool={this.props.tool} />;
+        return <SearchResults key={current} tool={this.props.tool} />;
         break;
       case "details":
         return (
           <div>
-            <ItemInfo tool={this.props.tool} />
-            <VideoResults tool={this.props.tool} />
+            <ItemInfo key={current} tool={this.props.tool} />
+            <VideoResults key={current} tool={this.props.tool} />
           </div>
         );
         break;
       case "profile":
-        return <UserInfo />;
+        return <UserInfo user={this.state.payload} key={current}/>;
         break;
       case "toolentry":
-        return <AddTool />;
+        return <AddTool user={this.state.payload} key={current}/>;
         break;
       case "toolbox":
-        return <ToolboxContainer />;
+        return <ToolboxContainer user={this.state.payload} key={current}/>;
         break;
       case "about":
-        return <WebsiteInfo />;
+        return <WebsiteInfo key={current}/>;
         break;
       case "search":
-        return <SearchBar />;
+        return <SearchBar key={current}/>;
         break;
       case "contact":
-        return <ContactForm />;
+        return <ContactForm key={current}/>;
         break;
     }
   };
@@ -170,7 +180,7 @@ class PersistentDrawerLeft extends React.Component {
     switch (option) {
       case "Profile":
         return (
-          <Link to="/profile">
+          <Link key="profileLink" to="/profile">
             <ListItem button key={option}>
               <ListItemIcon>
                 <AccountIcon />
@@ -182,7 +192,7 @@ class PersistentDrawerLeft extends React.Component {
         break;
       case "Toolbox":
         return (
-          <Link to="/toolbox">
+          <Link key="toolboxLink" to="/toolbox">
             <ListItem button key={option}>
               <ListItemIcon>
                 <ToolboxIcon />
@@ -194,7 +204,7 @@ class PersistentDrawerLeft extends React.Component {
         break;
       case "Add A Tool":
         return (
-          <Link to="/toolentry">
+          <Link key="addLink" to="/toolentry">
             <ListItem button key={option}>
               <ListItemIcon>
                 <AddIcon />
@@ -259,7 +269,7 @@ class PersistentDrawerLeft extends React.Component {
             </Link>
             <div>
               <Typography variant="title" color="inherit" noWrap>
-                Name
+                {"Signed in as " + this.state.payload.name}
               </Typography>
               <Menu
                 id="menu-appbar"
@@ -335,6 +345,7 @@ class PersistentDrawerLeft extends React.Component {
 
           {this.getMainContent(this.props.current)}
         </main>
+        
       </div>
     );
   }

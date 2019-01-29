@@ -10,7 +10,14 @@ module.exports = {
   },
   findByType: function(req, res) {
     db.Tool
-      .find({tool_type: req.params.tool_type})
+      .find({tool_type: req.params.tool_type}) 
+      .sort({ date: -1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findByUser: function(req, res) {
+    db.Tool
+      .find({owner_email: req.params.owner_email})
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

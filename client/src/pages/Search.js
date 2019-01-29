@@ -5,7 +5,7 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        <NavWithSidebar current="search" />
+        <NavWithSidebar key="search" current="search" />
       </div>
     );
   }

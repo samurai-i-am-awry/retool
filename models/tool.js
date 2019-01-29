@@ -13,6 +13,8 @@ const toolSchema = new Schema({
   deposit: { type: String },
   phone_number: { type: String },
   description: { type: String },
+  owner_email: { type: String},
+  currently_rented: {type: Boolean},
   date: { type: Date, default: Date.now }
 });
 

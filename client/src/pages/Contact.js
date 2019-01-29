@@ -6,7 +6,7 @@ class Profile extends Component {
     render() {
         return (
             <div>
-                <NavWithSidebar current="contact"/>
+                <NavWithSidebar key="contact" current="contact"/>
             </div>
         );
     }

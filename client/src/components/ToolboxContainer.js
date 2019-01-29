@@ -57,7 +57,7 @@ class ToolboxContainer extends Component {
 
 
   loadTools = () => {
-    API.getTools()
+    API.myTools("a@a.com")
       .then(res => this.setState({ tools: res.data }))
       .catch(err => console.log(err));
   };
@@ -78,7 +78,7 @@ class ToolboxContainer extends Component {
             <div>
               {this.state.tools.map(tool => (
                 <div className={classes.centering}>
-                  <ToolCard details={tool} remove={this.deleteTool}/>
+                  <ToolCard key={tool} details={tool} remove={this.deleteTool}/>
                 </div>
               ))}
             </div>

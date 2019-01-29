@@ -5,7 +5,7 @@ class Toolbox extends Component {
   render() {
     return (
       <div>
-        <NavWithSidebar current="toolbox" />
+        <NavWithSidebar key="toolbox" current="toolbox" />
       </div>
     );
   }

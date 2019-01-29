@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -6,6 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import API from "../utils/API";
+import Button from "@material-ui/core/Button";
 
 const dummyValues = {
   image: "saw.jpg",
@@ -50,6 +51,13 @@ const styles = theme => ({
   centering: {
     marginLeft: "auto",
     marginRight: "auto"
+  },
+  button: {
+    marginTop: theme.spacing.unit * 3,
+    marginLeft: theme.spacing.unit
+  },
+  buttons: {
+    textAlign: "center"
   }
 });
 
@@ -63,11 +71,19 @@ class ItemInfo extends Component {
   }
 
   findTool = () => {
-    console.log(this.props.tool)
+    console.log(this.props.tool);
     API.getTool(this.props.tool)
       .then(res => this.setState({ tool: res.data }))
       .catch(err => console.log(err));
   };
+
+  rentClick = (e) => {
+    console.log(this.state.tool);
+    API.rentTool(this.state.tool._id, true)
+    .then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
+
 
   render() {
     const { classes } = this.props;
@@ -89,7 +105,9 @@ class ItemInfo extends Component {
                 <Grid item xs>
                   <div className={classes.text}>
                     <Typography gutterBottom>
-                      <h2 className={classes.title}>{this.state.tool.tool_type}</h2>
+                      <h2 className={classes.title}>
+                        {this.state.tool.tool_type}
+                      </h2>
                     </Typography>
                     <Typography gutterBottom>
                       <h5>Description: {this.state.tool.description}</h5>
@@ -99,6 +117,16 @@ class ItemInfo extends Component {
                         Contact Me: {dummyValues.email}
                       </h5>
                     </Typography>
+                    <div className={classes.buttons}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        onClick={this.rentClick}
+                      >
+                        Rent Tool
+                      </Button>
+                    </div>
                   </div>
                 </Grid>
               </Grid>

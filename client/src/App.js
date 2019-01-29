@@ -3,6 +3,10 @@ import Home from "./pages/Home";
 import FrontPage from "./pages/FrontPage";
 import decode from "jwt-decode";
 
+const styles = theme => ({
+
+});
+
 class App extends Component {
 
   componentDidMount() {
@@ -11,7 +15,7 @@ class App extends Component {
 
   render() {
     const { isAuthenticated } = this.props.auth;
-
+    const { classes } = this.props;
     return (
       <div>
         {!isAuthenticated() && (

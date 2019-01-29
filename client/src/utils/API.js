@@ -22,5 +22,11 @@ export default {
   // Saves a book to the database
   saveTool: function(toolData) {
     return axios.post("/api/tool", toolData);
+  },
+  myTools: function(user_email) {
+    return axios.get("/api/tool/mytools/" + user_email);
+  },
+  rentTool: function(id, isRented) {
+    return axios.post("/api/tool/rent/" + id, isRented)
   }
 };

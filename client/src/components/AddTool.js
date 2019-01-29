@@ -11,6 +11,23 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import API from "../utils/API";
+import Modal from "@material-ui/core/Modal";
+
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
 
 const styles = theme => ({
   paper: {
@@ -21,7 +38,15 @@ const styles = theme => ({
   button: {
     marginTop: theme.spacing.unit * 3,
     marginLeft: theme.spacing.unit
-  }
+  },  
+  popup: {
+    position: 'absolute',
+    width: theme.spacing.unit * 50,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: 'none',
+  },
 });
 
 class AddTool extends React.Component {
@@ -35,7 +60,9 @@ class AddTool extends React.Component {
     phone: "",
     tool: "",
     condition: "",
-    description: ""
+    description: "",
+    owner_email: "",
+    open: false
   };
 
   /*   handleNameChange = e => {
@@ -43,6 +70,10 @@ class AddTool extends React.Component {
       name: e.target.value
     });
   }; */
+
+
+
+
   handlePriceChange = e => {
     this.setState({
       pricePerHour: e.target.value
@@ -89,6 +120,28 @@ class AddTool extends React.Component {
       });
     }
 
+    cleanInput() {
+      this.setState({
+        name: "",
+        pricePerHour: "",
+        manufacturer: "",
+        minRentalTime: "",
+        pictureURL: "",
+        deposit: "",
+        phone: "",
+        tool: "",
+        condition: "",
+        description: "",
+        open: true
+      })
+  }
+
+ 
+  
+    handleClose = () => {
+      this.setState({ open: false });
+    };
+
   buttonClick = event => {
     console.log("Name: " + this.state.name);
     console.log("Tool: " + this.state.tool);
@@ -101,6 +154,7 @@ class AddTool extends React.Component {
     console.log("Phone: " + this.state.phone);
 
     event.preventDefault();
+    this.cleanInput();
     if (
       this.state.tool &&
       this.state.condition &&
@@ -113,6 +167,7 @@ class AddTool extends React.Component {
       this.state.description
     ) {
       console.log("saving");
+      console.log(this.props.user.email)
       API.saveTool({
         tool_type: this.state.tool,
         condition: this.state.condition,
@@ -122,7 +177,9 @@ class AddTool extends React.Component {
         picture_url: this.state.pictureURL,
         deposit: this.state.deposit,
         description: this.state.description,
-        phone_number: this.state.phone
+        phone_number: this.state.phone,
+        owner_email: this.props.user.email,
+        currently_rented: false
       })
         .then(res => console.log(res))
         .catch(err => console.log(err));
@@ -255,6 +312,19 @@ class AddTool extends React.Component {
             </Button>
           </div>
         </Paper>
+        <Modal
+          open={this.state.open}
+          onClose={this.handleClose}
+        >
+          <div style={getModalStyle()} className={classes.popup}>
+            <Typography variant="h6" id="modal-title">
+              Success!
+            </Typography>
+            <Typography variant="subtitle1" id="simple-modal-description">
+              You added a new tool!  Visit your toolbox to view your tools available to rent.
+            </Typography>
+          </div>
+        </Modal>
       </React.Fragment>
     );
   }

@@ -5,7 +5,7 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        <NavWithSidebar current="toolentry" />
+        <NavWithSidebar key="toolentry" current="toolentry" />
       </div>
     );
   }
