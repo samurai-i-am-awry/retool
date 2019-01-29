@@ -1,0 +1,16 @@
+html, 
+body {
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+body {
+    background-image: url("homeBackground2.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}

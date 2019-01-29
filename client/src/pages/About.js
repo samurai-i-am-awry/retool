@@ -15,6 +15,7 @@ class About extends Component {
             auth={this.props.auth}
             {...this.props}
             current="about"
+            key="about"
           />
         )}
       </div>

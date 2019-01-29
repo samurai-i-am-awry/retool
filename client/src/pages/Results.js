@@ -17,6 +17,7 @@ class Results extends Component {
             {...this.props}
             current="results"
             tool={this.props.match.params.query}
+            key="results"
           />
         )}
       </div>

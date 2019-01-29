@@ -16,7 +16,9 @@ const toolSeed = [
     deposit: "one",
     phone_number: "twentythree",
     description: "This is a tool",
-    date: "test"
+    date: "test",
+    owner_email: "a@a.com",
+    currently_rented: false
   }
 ];
 

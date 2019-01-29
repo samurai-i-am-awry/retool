@@ -15,6 +15,7 @@ class Toolbox extends Component {
             auth={this.props.auth}
             {...this.props}
             current="toolbox"
+            key="toolbox"
           />
         )}
       </div>

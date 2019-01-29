@@ -34,14 +34,6 @@ const styles = theme => ({
     }
 }});
 
-const dummyValues = {
-    email: "a@a.com",
-    firstName: "Nate",
-    lastName: "Niesel",
-    zip: "78681",
-    phone: "123456789"
-}
-
 
 
 function SimpleTable(props) {

@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import Home from "./pages/Home";
 import FrontPage from "./pages/FrontPage";
 
+const styles = theme => ({
+
+});
+
 class App extends Component {
   render() {
     const { isAuthenticated } = this.props.auth;
-
+    const { classes } = this.props;
     return (
       <div>
         {!isAuthenticated() && (

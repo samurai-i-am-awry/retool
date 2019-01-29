@@ -15,6 +15,7 @@ class Profile extends Component {
             auth={this.props.auth}
             {...this.props}
             current="toolentry"
+            key="toolentry"
           />
         )}
       </div>

@@ -16,6 +16,7 @@ class Details extends Component {
             {...this.props}
             current="details"
             tool={this.props.match.params.id}
+            key="details"
           />
         )}
       </div>
