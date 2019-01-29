@@ -8,13 +8,10 @@ const styles = theme => ({
 });
 
 class App extends Component {
-  // componentDidMount() {
-  //   console.log("HELLLLLLLLLLLLo")
-  //   if (localStorage.getItem("id_token")) {
-  //     let idTokenPayload = decode(localStorage.getItem("id_token"));
-  //     console.log(idTokenPayload);
-  //   }
-  // }
+
+  componentDidMount() {
+    this.props.auth.getProfile();
+  }
 
   render() {
     const { isAuthenticated } = this.props.auth;
