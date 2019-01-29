@@ -15,9 +15,12 @@ const styles = theme => ({
       width: 400,
       marginLeft: "auto",
       marginRight: "auto"
+    
+  
     }
   },
   paper: {
+    backgroundColor: "#22f4db",
     marginTop: theme.spacing.unit * 8,
     display: "flex",
     flexDirection: "column",
@@ -27,8 +30,8 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
-    backgroundColor: "turquoise",
-    color: "black"
+    backgroundColor: "#6A6AA0",
+    color: "#22f4db"
   },
   form: {
     width: "100%", // Fix IE 11 issue.
