@@ -110,8 +110,21 @@ const styles = theme => ({
 class PersistentDrawerLeft extends React.Component {
   state = {
     open: false,
-    anchorEl: null
+    anchorEl: null,
+    profile: {}
   };
+
+  componentWillMount() {
+    this.setState({ profile: {} });
+    const { userProfile, getProfile } = this.props.auth;
+    if (!userProfile) {
+      getProfile((err, profile) => {
+        this.setState({ profile });
+      });
+    } else {
+      this.setState({ profile: userProfile });
+    }
+  }
 
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -129,14 +142,12 @@ class PersistentDrawerLeft extends React.Component {
     this.setState({ open: false });
   };
 
-  getMainContent = (current, userProfile) => {
+  getMainContent = current => {
     switch (current) {
       case "home":
         return <SearchBar />;
-        break;
       case "results":
         return <SearchResults tool={this.props.tool} />;
-        break;
       case "details":
         return (
           <div>
@@ -144,25 +155,18 @@ class PersistentDrawerLeft extends React.Component {
             <VideoResults tool={this.props.tool} />
           </div>
         );
-        break;
       case "profile":
-        return <UserInfo user={userProfile}/>;
-        break;
+        return <UserInfo user={this.state.profile} />;
       case "toolentry":
         return <AddTool />;
-        break;
       case "toolbox":
         return <ToolboxContainer />;
-        break;
       case "about":
         return <WebsiteInfo />;
-        break;
       case "search":
         return <SearchBar />;
-        break;
       case "contact":
         return <ContactForm />;
-        break;
     }
   };
 
@@ -179,7 +183,6 @@ class PersistentDrawerLeft extends React.Component {
             </ListItem>
           </Link>
         );
-        break;
       case "Toolbox":
         return (
           <Link to="/toolbox">
@@ -191,7 +194,6 @@ class PersistentDrawerLeft extends React.Component {
             </ListItem>
           </Link>
         );
-        break;
       case "Add A Tool":
         return (
           <Link to="/toolentry">
@@ -203,36 +205,16 @@ class PersistentDrawerLeft extends React.Component {
             </ListItem>
           </Link>
         );
-        break;
     }
   };
 
   render() {
-    const { classes, theme } = this.props;
-    const { auth, anchorEl } = this.state;
+    const { classes, theme, auth } = this.props;
+    const { anchorEl } = this.state;
     const openSide = this.state.open;
     const openMenu = Boolean(anchorEl);
-    // const links = [
-    //   <Link to="/contact">
-    //     <ListItem button key={option}>
-    //       <ListItemIcon>
-    //         <ContactIcon />
-    //       </ListItemIcon>
-    //       <ListItemText primary={option} />
-    //     </ListItem>
-    //   </Link>,
-    //   <Link to="/about">
-    //     <ListItem button key={option}>
-    //       <ListItemIcon>
-    //         <AboutIcon />
-    //       </ListItemIcon>
-    //       <ListItemText primary={option} />
-    //     </ListItem>
-    //   </Link>
-    // ];
-    this.props.auth.getProfile();
-    let userProfile = JSON.parse(localStorage.getItem("profile"));
-    console.log(userProfile);
+
+    const { profile } = this.state;
     const namespace = "https://mkothari:auth0:com/";
 
     return (
@@ -263,7 +245,9 @@ class PersistentDrawerLeft extends React.Component {
             </Link>
             <div>
               <Typography variant="title" color="inherit" noWrap>
-                {userProfile[namespace + "firstName"] + " " + userProfile[namespace + "lastName"]}
+                {profile[namespace + "firstName"] +
+                  " " +
+                  profile[namespace + "lastName"]}
               </Typography>
               <Menu
                 id="menu-appbar"
@@ -328,6 +312,9 @@ class PersistentDrawerLeft extends React.Component {
                 <ListItemText primary="About" />
               </ListItem>
             </Link>
+            <ListItem button key="logout" onClick={() => this.props.auth.logout()}>
+              <ListItemText primary="Logout" />
+            </ListItem>
           </List>
         </Drawer>
         <main
@@ -336,8 +323,7 @@ class PersistentDrawerLeft extends React.Component {
           })}
         >
           <div className={classes.drawerHeader} />
-
-          {this.getMainContent(this.props.current, userProfile)}
+          {this.getMainContent(this.props.current)}
         </main>
       </div>
     );

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Home from "./pages/Home";
 import FrontPage from "./pages/FrontPage";
-import decode from "jwt-decode";
 
 class App extends Component {
   render() {
