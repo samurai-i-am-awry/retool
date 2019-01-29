@@ -147,10 +147,8 @@ class PersistentDrawerLeft extends React.Component {
     switch (current) {
       case "home":
         return <SearchBar key={current}/>;
-        break;
       case "results":
         return <SearchResults key={current} tool={this.props.tool} />;
-        break;
       case "details":
         return (
           <div>
@@ -159,23 +157,17 @@ class PersistentDrawerLeft extends React.Component {
           </div>
         );
       case "profile":
-        return <UserInfo user={this.state.payload} key={current}/>;
-        break;
+        return <UserInfo user={this.state.profile} key={current}/>;
       case "toolentry":
-        return <AddTool user={this.state.payload} key={current}/>;
-        break;
+        return <AddTool user={this.state.profile} key={current}/>;
       case "toolbox":
-        return <ToolboxContainer user={this.state.payload} key={current}/>;
-        break;
+        return <ToolboxContainer user={this.state.profile} key={current}/>;
       case "about":
         return <WebsiteInfo key={current}/>;
-        break;
       case "search":
         return <SearchBar key={current}/>;
-        break;
       case "contact":
         return <ContactForm key={current}/>;
-        break;
     }
   };
 
