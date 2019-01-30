@@ -44,8 +44,8 @@ const styles = theme => ({
   remove: {
     height: "100%",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "left",
+    alignItems: "left",
     color: "red"
   }
 });
@@ -145,16 +145,14 @@ class ToolCard extends Component {
                 </div>
               </Grid>
               
-              <Grid item>
-                <Typography
+            </Grid>
+            <Typography
                   className={classes.remove}
                   onClick={() => this.props.remove(this.props.details._id)}
                   style={{ cursor: "pointer" }}
                 >
                   Remove
                 </Typography>
-              </Grid>
-            </Grid>
           </CardContent>
           <div className={classes.controls} />
         </div>
