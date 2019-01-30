@@ -13,7 +13,7 @@ const styles = theme => ({
   table: {
     minWidth: 250,
     maxWidth: 500
-  }, 
+  },
   paper: {
     marginTop: theme.spacing.unit * 8,
     display: "flex",
@@ -21,7 +21,7 @@ const styles = theme => ({
     alignItems: "center",
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
       .spacing.unit * 3}px`
-  },   
+  },
   main: {
     width: "auto",
     display: "block", // Fix IE 11 issue.
@@ -37,7 +37,8 @@ const styles = theme => ({
 
 
 function SimpleTable(props) {
-  const { classes } = props;
+  const { classes, user } = props;
+  const namespace = "https://mkothari:auth0:com/";
 
   return (
     <main className={classes.main}>
@@ -52,25 +53,25 @@ function SimpleTable(props) {
               <TableCell component="th" scope="row">
                 <strong>Email:</strong>
               </TableCell>
-              <TableCell align="center">{props.user.email}</TableCell>
+              <TableCell align="center">{user.email}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
                 <strong>Name:</strong>
               </TableCell>
-              <TableCell align="center">{props.user.name}</TableCell>
+              <TableCell align="center">{user[namespace + "firstName"] + " " + user[namespace + "lastName"]}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
                 <strong>Zipcode:</strong>
               </TableCell>
-              <TableCell align="center">888888</TableCell>
+              <TableCell align="center">{user[namespace + "zipCode"]}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
                 <strong>Phone:</strong>
               </TableCell>
-              <TableCell align="center">898532798275239</TableCell>
+              <TableCell align="center">{user[namespace + "phoneNumber"]}</TableCell>
             </TableRow>
         </TableBody>
       </Table>

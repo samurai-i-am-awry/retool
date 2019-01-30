@@ -1,15 +1,26 @@
-import React, {Component} from 'react';
-import NavWithSidebar from '../components/NavWithSidebar';
+import React, { Component } from "react";
+import NavWithSidebar from "../components/NavWithSidebar";
+import FrontPage from "./FrontPage"
 
 class Profile extends Component {
-
     render() {
+        const { isAuthenticated } = this.props.auth;
         return (
-            <div>
-                <NavWithSidebar key="contact" current="contact"/>
-            </div>
+          <div>
+            {!isAuthenticated() && (
+              <FrontPage auth={this.props.auth} {...this.props} />
+            )}
+            {isAuthenticated() && (
+              <NavWithSidebar
+                auth={this.props.auth}
+                {...this.props}
+                current="contact"
+                key="contact"
+              />
+            )}
+          </div>
         );
-    }
-};
+      }
+}
 
 export default Profile;

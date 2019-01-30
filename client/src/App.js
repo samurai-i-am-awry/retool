@@ -1,18 +1,12 @@
 import React, { Component } from "react";
 import Home from "./pages/Home";
 import FrontPage from "./pages/FrontPage";
-import decode from "jwt-decode";
 
 const styles = theme => ({
 
 });
 
 class App extends Component {
-
-  componentDidMount() {
-    this.props.auth.getProfile();
-  }
-
   render() {
     const { isAuthenticated } = this.props.auth;
     const { classes } = this.props;

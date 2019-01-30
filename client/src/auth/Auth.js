@@ -2,6 +2,7 @@ import auth0 from "auth0-js";
 import history from "../history";
 
 export default class Auth {
+  userProfile;
   auth0 = new auth0.WebAuth({
     domain: "mkothari.auth0.com",
     clientID: "dtTz_Es2NA_pZfAiRO8gCh6lxnbmsYUN",
@@ -110,8 +111,9 @@ export default class Auth {
     localStorage.removeItem("access_token");
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
+    this.userProfile = null;
     // navigate to the home route
-    history.replace("/home");
+    history.replace("/");
   }
 
   isAuthenticated() {
@@ -121,16 +123,18 @@ export default class Auth {
     return new Date().getTime() < expiresAt;
   }
 
-  getProfile() {
+  getProfile(cb) {
     if (!localStorage.getItem("access_token")) {
       console.log("Access Token must exist to fetch profile");
       return;
     }
     let accessToken = localStorage.getItem("access_token");
-    this.auth0.client.userInfo(accessToken, function(err, profile) {
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
       if (profile) {
-        console.log(profile);
+        this.userProfile = profile;
       }
+      cb(err, profile);
     });
+
   }
 }
