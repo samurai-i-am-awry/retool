@@ -22,6 +22,7 @@ const styles = theme => ({
     }
   },
   paper: {
+    backgroundColor: "#22f4db", 
     marginTop: theme.spacing.unit * 8,
     display: "flex",
     flexDirection: "column",
@@ -39,8 +40,8 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
-    backgroundColor: "turquoise",
-    color: "black"
+    backgroundColor: "#6A6AA0",
+    color: "#22f4db"
   },
   logo: {
     height: "75px",
