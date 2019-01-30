@@ -15,6 +15,7 @@ const toolSchema = new Schema({
   description: { type: String },
   owner_email: { type: String},
   currently_rented: {type: Boolean},
+  renter_email: {type: String},
   date: { type: Date, default: Date.now }
 });
 

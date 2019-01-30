@@ -40,6 +40,7 @@ import AddTool from "./AddTool";
 import UserInfo from "./UserInfo";
 import ContactForm from "./ContactForm";
 import decode from "jwt-decode";
+import SearchIcon from "@material-ui/icons/Search"
 
 const drawerWidth = 240;
 
@@ -150,7 +151,7 @@ class PersistentDrawerLeft extends React.Component {
       case "details":
         return (
           <div>
-            <ItemInfo key={current} tool={this.props.tool} />
+            <ItemInfo key={current} user={this.state.payload} tool={this.props.tool} />
             <VideoResults key={current} tool={this.props.tool} />
           </div>
         );
@@ -214,6 +215,18 @@ class PersistentDrawerLeft extends React.Component {
           </Link>
         );
         break;
+        case "Search":
+        return (
+          <Link key="addLink" to="/search">
+            <ListItem button key={option}>
+              <ListItemIcon>
+                <SearchIcon />
+              </ListItemIcon>
+              <ListItemText primary={option} />
+            </ListItem>
+          </Link>
+        );
+        break;
     }
   };
 
@@ -263,7 +276,7 @@ class PersistentDrawerLeft extends React.Component {
               <MenuIcon />
             </IconButton>
             <Link to="/home">
-              <Typography variant="title" color="inherit" noWrap>
+              <Typography variant="title" color="inherit" align="center" noWrap>
                 Re-Tool
               </Typography>
             </Link>
@@ -312,7 +325,7 @@ class PersistentDrawerLeft extends React.Component {
           </div>
           <Divider />
           <List>
-            {["Profile", "Toolbox", "Add A Tool"].map((text, index) =>
+            {["Profile", "Toolbox", "Add A Tool", "Search"].map((text, index) =>
               this.selectIcon(text)
             )}
           </List>

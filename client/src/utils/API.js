@@ -21,12 +21,21 @@ export default {
   },
   // Saves a book to the database
   saveTool: function(toolData) {
+    console.log(toolData)
     return axios.post("/api/tool", toolData);
   },
   myTools: function(user_email) {
     return axios.get("/api/tool/mytools/" + user_email);
   },
   rentTool: function(id, isRented) {
-    return axios.post("/api/tool/rent/" + id, isRented)
+    console.log("isRented: " + isRented)
+    return axios.post("/api/tool/rent/" + id, {currently_rented: isRented})
+  },
+  setRenter: function(id, renter_email) {
+    console.log("isRented: " + renter_email)
+    return axios.post("/api/tool/rent/" + id, {renter_email: renter_email})
+  },
+  getVideos: function(query) {
+    return axios.get(BASEURL + query + "&key=" + KEY);
   }
 };
