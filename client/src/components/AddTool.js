@@ -1,10 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import classNames from "classnames";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import ChooseTool from "./ChooseTool";
 import Paper from "@material-ui/core/Paper";
 import PropTypes from "prop-types";
@@ -24,10 +21,9 @@ function getModalStyle() {
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
+    transform: `translate(-${top}%, -${left}%)`
   };
 }
-
 
 const styles = theme => ({
   paper: {
@@ -38,15 +34,15 @@ const styles = theme => ({
   button: {
     marginTop: theme.spacing.unit * 3,
     marginLeft: theme.spacing.unit
-  },  
+  },
   popup: {
-    position: 'absolute',
+    position: "absolute",
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: 'none',
-  },
+    outline: "none"
+  }
 });
 
 class AddTool extends React.Component {
@@ -70,9 +66,6 @@ class AddTool extends React.Component {
       name: e.target.value
     });
   }; */
-
-
-
 
   handlePriceChange = e => {
     this.setState({
@@ -113,34 +106,32 @@ class AddTool extends React.Component {
     this.setState({
       condition: conditionValue.value
     });
-  }
-    handleDescriptionChange = e => {
-      this.setState({
-        description: e.target.value
-      });
-    }
+  };
+  handleDescriptionChange = e => {
+    this.setState({
+      description: e.target.value
+    });
+  };
 
-    cleanInput() {
-      this.setState({
-        name: "",
-        pricePerHour: "",
-        manufacturer: "",
-        minRentalTime: "",
-        pictureURL: "",
-        deposit: "",
-        phone: "",
-        tool: "",
-        condition: "",
-        description: "",
-        open: true
-      })
+  cleanInput() {
+    this.setState({
+      name: "",
+      pricePerHour: "",
+      manufacturer: "",
+      minRentalTime: "",
+      pictureURL: "",
+      deposit: "",
+      phone: "",
+      tool: "",
+      condition: "",
+      description: "",
+      open: true
+    });
   }
 
- 
-  
-    handleClose = () => {
-      this.setState({ open: false });
-    };
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   buttonClick = event => {
     console.log("Name: " + this.state.name);
@@ -167,7 +158,7 @@ class AddTool extends React.Component {
       this.state.description
     ) {
       console.log("saving");
-      console.log(this.props.user.email)
+      console.log(this.props.user.email);
       API.saveTool({
         tool_type: this.state.tool,
         condition: this.state.condition,
@@ -312,16 +303,14 @@ class AddTool extends React.Component {
             </Button>
           </div>
         </Paper>
-        <Modal
-          open={this.state.open}
-          onClose={this.handleClose}
-        >
+        <Modal open={this.state.open} onClose={this.handleClose}>
           <div style={getModalStyle()} className={classes.popup}>
             <Typography variant="h6" id="modal-title">
               Success!
             </Typography>
             <Typography variant="subtitle1" id="simple-modal-description">
-              You added a new tool!  Visit your toolbox to view your tools available to rent.
+              You added a new tool! Visit your toolbox to view your tools
+              available to rent.
             </Typography>
           </div>
         </Modal>
@@ -335,122 +324,3 @@ AddTool.propTypes = {
 };
 
 export default withStyles(styles)(AddTool);
-
-// function AddTool(props) {
-//   const { classes } = props;
-//   return (
-//     <React.Fragment>
-//       <Paper className={classes.paper}>
-//         <Typography variant="h6" gutterBottom>
-//           Add a Tool
-//         </Typography>
-//         <Grid container spacing={24}>
-
-//         <Grid item xs={12}>
-//             <TextField
-//               id="toolName"
-//               name="toolName"
-//               label="Enter a tool Name"
-//               fullWidth
-//               autoComplete=""
-//               value={this.state.name}
-//               onChange={this._handleTextFieldChange}
-//             />
-//           </Grid>
-//           <Grid item xs={12} sm={6}>
-//             <ChooseTool type="tool"/>
-//           </Grid>
-//           <Grid item xs={12} sm={6}>
-//             <ChooseTool type="condition"/>
-//           </Grid>
-//           <Grid item xs={12} sm={6}>
-//             <TextField
-//               required
-//               id="pricePerHour"
-//               name="pricePerHour"
-//               label="Price Per Hour"
-//               fullWidth
-//               autoComplete=""
-//               value={this.state.pricePerHour}
-//               onChange={this._handleTextFieldChange}
-//             />
-//           </Grid>
-//           <Grid item xs={12} sm={6}>
-//             <TextField
-//               required
-//               id="manufacturer"
-//               name="manufacturer"
-//               label="Manufacturer"
-//               fullWidth
-//               autoComplete=""
-//               value={this.state.manufacturer}
-//               onChange={this._handleTextFieldChange}
-//             />
-//           </Grid>
-//           <Grid item xs={12} sm={6}>
-//             <TextField
-//               id="minRentalTime"
-//               name="minRentalTime"
-//               label="Minimum Rental Time"
-//               fullWidth
-//               autoComplete=""
-//               value={this.state.minRentalTime}
-//               onChange={this._handleTextFieldChange}
-//             />
-//           </Grid>
-//           <Grid item xs={12} sm={6}>
-//             <TextField
-//               required
-//               id="pictureURL"
-//               name="pictureURL"
-//               label="Picture URL"
-//               fullWidth
-//               autoComplete=""
-//               value={this.state.picture}
-//               onChange={this._handleTextFieldChange}
-//             />
-//           </Grid>
-//           <Grid item xs={12} sm={6}>
-//             <TextField
-//               required
-//               id="deposit"
-//               name="deposit"
-//               label="Deposit"
-//               fullWidth
-//               autoComplete=""
-//               value={this.state.deposit}
-//               onChange={this._handleTextFieldChange}
-//             />
-//           </Grid>
-//           <Grid item xs={12} sm={6}>
-//             <TextField
-//               required
-//               id="phone"
-//               name="phone"
-//               label="Phone Number"
-//               fullWidth
-//               autoComplete="phone number"
-//               value={this.state.phone}
-//               onChange={this._handleTextFieldChange}
-//             />
-//           </Grid>
-//         </Grid>
-//         <div className={classes.buttons}>
-//           <Button
-//             variant="contained"
-//             color="primary"
-//             className={classes.button}
-//           >
-//             Add Tool
-//           </Button>
-//         </div>
-//       </Paper>
-//     </React.Fragment>
-//   );
-// }
-
-// AddTool.propTypes = {
-//   classes: PropTypes.object.isRequired
-// };
-
-// export default withStyles(styles)(AddTool);

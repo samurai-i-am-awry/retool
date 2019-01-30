@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import ToolCard from "./ToolCard";
 import API from "../utils/API";
 
@@ -55,13 +52,11 @@ class ToolboxContainer extends Component {
     this.loadTools();
   }
 
-
   loadTools = () => {
-    API.myTools("a@a.com")
+    API.myTools(this.props.user.email)
       .then(res => this.setState({ tools: res.data }))
       .catch(err => console.log(err));
   };
-
 
   deleteTool = id => {
     API.deleteTool(id)
@@ -77,9 +72,12 @@ class ToolboxContainer extends Component {
           {this.state.tools.length ? (
             <div>
               {this.state.tools.map(tool => (
-                <div className={classes.centering}>
-                  <ToolCard key={tool} details={tool} remove={this.deleteTool}/>
-                </div>
+                <ToolCard
+                  key={tool._id}
+                  details={tool}
+                  remove={this.deleteTool}
+                  className={classes.centering}
+                />
               ))}
             </div>
           ) : (
@@ -96,25 +94,3 @@ ToolboxContainer.propTypes = {
 };
 
 export default withStyles(styles)(ToolboxContainer);
-
-/* 
-function ToolboxContainer(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        {dummyValues.map(card => (
-          <div className={classes.centering}>
-            <ToolCard details={card} />
-          </div>
-        ))}
-      </Paper>
-    </div>
-  );
-}
-
-ToolboxContainer.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(ToolboxContainer); */

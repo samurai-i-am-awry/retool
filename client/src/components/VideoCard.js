@@ -1,24 +1,25 @@
-import React from 'react';
-import YouTube from 'react-youtube';
-import styles from './VideoCard.css';
+import React from "react";
+import YouTube from "react-youtube";
+import styles from "./VideoCard.css";
 
 class VideoCard extends React.Component {
   render() {
     const opts = {
-      height: 'auto',
-      width: 'auto',
-      playerVars: { // https://developers.google.com/youtube/player_parameters
+      height: "auto",
+      width: "auto",
+      playerVars: {
+        // https://developers.google.com/youtube/player_parameters
         autoplay: 1
       }
     };
 
     return (
-        <div className={styles.centering}>
-      <YouTube
-        videoId={this.props.result.id.videoId}
-        opts={opts}
-        onReady={this._onReady}
-      />
+      <div className={styles.centering}>
+        <YouTube
+          videoId={this.props.result.id.videoId}
+          opts={opts}
+          onReady={this._onReady}
+        />
       </div>
     );
   }
