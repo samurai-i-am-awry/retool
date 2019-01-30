@@ -157,7 +157,7 @@ class ItemInfo extends Component {
                     </Paper>
                     <Typography gutterBottom>
                       <h5 className={classes.contact}>
-                        Contact Me: {dummyValues.email}
+                        Contact Me: {this.state.tool.owner_email}
                       </h5>
                     </Typography>
                     <div className={classes.buttons}>

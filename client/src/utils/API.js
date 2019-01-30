@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASEURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=";
-const KEY = "AIzaSyAeSWk8gxMd0AyLuJOEv-n_ZGpKf0cc9PM";
+const KEY = process.env.YOUTUBE_KEY;
 
 export default {
   // Gets all books
