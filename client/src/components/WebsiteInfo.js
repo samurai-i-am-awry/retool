@@ -13,19 +13,19 @@ const developers = [
   {
     name: "Nathan Niesel",
     email: "nniesel90@gmail.com",
-    image: "Nathan.jpg",
+    image: "nathan.JPG",
     github: "https://github.com/NateNi"
   },
   {
     name: "Andrea Halloran",
     email: "andreahalloran@utexas.edu",
-    image: "Andrea.png",
+    image: "andrea.png",
     github: "https://github.com/andrea-halloran"
   },
   {
     name: "Mihir Kothari",
     email: "mihir.k25@gmail.com",
-    image: "Mihir.jpg",
+    image: "mihir.jpg",
     github: "https://github.com/mihirkothari25"
   },
   {
