@@ -7,6 +7,22 @@ import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import API from "../utils/API";
 import Button from "@material-ui/core/Button";
+import Modal from "@material-ui/core/Modal";
+
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`
+  };
+}
 
 const dummyValues = {
   image: "saw.jpg",
@@ -36,16 +52,20 @@ const styles = theme => ({
     maxWidth: 400
   },
   image: {
-    width: 400,
-    height: 400,
+    width: "300px",
+    //height: 400,
     margin: "auto",
-    display: "block"
+    display: "block",
+    justifyContent: "center",
+    alignItems: "center"
+
   },
   img: {
     margin: "auto",
     display: "block",
     maxWidth: "100%",
     maxHeight: "100%"
+
   },
   title: {
     textAlign: "center",
@@ -68,12 +88,27 @@ const styles = theme => ({
   },
   buttons: {
     textAlign: "center"
+  },
+  popup: {
+    position: "absolute",
+    width: theme.spacing.unit * 50,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: "none"
+  },
+  imageContainer: {
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
 
 class ItemInfo extends Component {
   state = {
-    tool: {}
+    tool: {},
+    open: false
   };
 
   componentDidMount() {
@@ -87,20 +122,25 @@ class ItemInfo extends Component {
       .catch(err => console.log(err));
   };
 
-  rentClick = (e) => {
+  rentClick = e => {
     console.log(this.state.tool);
+    this.setState({
+      open: true
+    });
     API.rentTool(this.state.tool._id, true)
-    .then(res => this.setRenter())
+      .then(res => this.setRenter())
       .catch(err => console.log(err));
-  }
-
+  };
 
   setRenter = () => {
     API.setRenter(this.state.tool._id, this.props.user.email)
-    .then(res => this.findTool())
+      .then(res => this.findTool())
       .catch(err => console.log(err));
-  }
+  };
 
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   render() {
     const { classes } = this.props;
@@ -110,67 +150,73 @@ class ItemInfo extends Component {
           <Grid container spacing={16}>
             <Grid item className={classes.centering}>
               {/* <ButtonBase className={classes.image}> */}
+              <div className={classes.imageContainer}>
               <img
                 className={classes.image}
                 alt="complex"
                 src={this.state.tool.picture_url}
               />
               {/* </ButtonBase> */}
+              </div>
             </Grid>
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={16}>
                 <Grid item xs>
                   <div className={classes.text}>
-                  <Paper className={classes.paper}>
-                    <Typography gutterBottom>
-                      <h2 className={classes.title}>
-                        {this.state.tool.tool_type}
-                      </h2>
-                    </Typography>
-                    
-                    <Typography gutterBottom>
-                      <h3 className={classes.title}>
-                        {this.state.tool.manufacturer}
-                      </h3>
-                    </Typography>
-                    
-                
-                    <Typography gutterBottom>
-                      <h5>Description: {this.state.tool.description}</h5>
-                      <br/>
-                    </Typography>
-               
-                    <Paper className={classes.paperDetails}>
-                   
-                    <Typography gutterBottom>
-                      <h5>Condition: {this.state.tool.condition}</h5>
-                    </Typography>
-                    <Typography gutterBottom>
-                      <h5>Min Rental Time: {this.state.tool.min_rental_time}</h5>
-                    </Typography>
-                    <Typography gutterBottom>
-                      <h5>Price/Hour: ${this.state.tool.price_per_hour}</h5>
-                    </Typography>
-                    <Typography gutterBottom>
-                      <h5>Deposit: ${this.state.tool.deposit}</h5>
-                    </Typography>
-                    </Paper>
-                    <Typography gutterBottom>
-                      <h5 className={classes.contact}>
-                        Contact Me: {this.state.tool.owner_email}
-                      </h5>
-                    </Typography>
-                    <div className={classes.buttons}>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                        onClick={this.rentClick}
-                        disabled={this.state.tool.currently_rented}
-                      >
-                        Rent Tool
-                      </Button>
-                    </div>
+                    <Paper className={classes.paper}>
+                      <Typography gutterBottom>
+                        <h2 className={classes.title}>
+                          {this.state.tool.tool_type}
+                        </h2>
+                      </Typography>
+
+                      <Typography gutterBottom>
+                        <h3 className={classes.title}>
+                          {this.state.tool.manufacturer}
+                        </h3>
+                      </Typography>
+
+                      <Typography gutterBottom>
+                        <h5>Description: {this.state.tool.description}</h5>
+                        <br />
+                      </Typography>
+
+                      <Paper className={classes.paperDetails}>
+                        <Typography gutterBottom>
+                          <h5>Condition: {this.state.tool.condition}</h5>
+                        </Typography>
+                        <Typography gutterBottom>
+                          <h5>
+                            Min Rental Time: {this.state.tool.min_rental_time}{" "}
+                            hr
+                          </h5>
+                        </Typography>
+                        <Typography gutterBottom>
+                          <h5>Price/Hour: ${this.state.tool.price_per_hour}</h5>
+                        </Typography>
+                        <Typography gutterBottom>
+                          <h5>Deposit: ${this.state.tool.deposit}</h5>
+                        </Typography>
+                      </Paper>
+                      <Typography gutterBottom>
+                        <h5 className={classes.contact}>
+                          Contact Me:{" "}
+                          <a href={"mailto:" + this.state.tool.owner_email}>
+                            {this.state.tool.owner_email}
+                          </a>
+                        </h5>
+                      </Typography>
+                      <div className={classes.buttons}>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className={classes.button}
+                          onClick={this.rentClick}
+                          disabled={this.state.tool.currently_rented}
+                        >
+                          Rent Tool
+                        </Button>
+                      </div>
                     </Paper>
                   </div>
                 </Grid>
@@ -178,6 +224,17 @@ class ItemInfo extends Component {
             </Grid>
           </Grid>
         </Paper>
+        <Modal open={this.state.open} onClose={this.handleClose}>
+          <div style={getModalStyle()} className={classes.popup}>
+            <Typography variant="h6" id="modal-title">
+              Tool Rented!
+            </Typography>
+            <Typography variant="subtitle1" id="simple-modal-description">
+              You have reserved this tool! You can contact the owner through the
+              email on this page.
+            </Typography>
+          </div>
+        </Modal>
       </div>
     );
   }

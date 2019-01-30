@@ -118,7 +118,7 @@ class ToolCard extends Component {
                 <Typography className={classes.row}>
                   Min Rental Time: 
                   <br/>
-                  {this.props.details.min_rental_time}
+                  {this.props.details.min_rental_time} hr
                 </Typography>
               </Grid>
 
@@ -139,8 +139,8 @@ class ToolCard extends Component {
                   onClick={this.rentClick}
                 >
                   {this.state.isRented
-                    ? "Available"
-                    : "Unavailable"}
+                    ? "Unavailable"
+                    : "Available"}
                 </Button>
                 </div>
               </Grid>

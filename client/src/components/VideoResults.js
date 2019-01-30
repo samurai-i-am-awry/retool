@@ -15,6 +15,8 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import VideoCard from "./VideoCard";
 import API from "../utils/API";
+import Paper from "@material-ui/core/Paper";
+
 
 const styles = theme => ({
   appBar: {
@@ -65,6 +67,18 @@ const styles = theme => ({
   centering: {
     marginLeft: 'auto',
     marginRight: 'auto'
+  },
+    paper: {
+    padding: theme.spacing.unit * 2,
+    margin: "auto",
+    maxWidth: 1300
+  },
+  wrapper: {
+    marginTop: "30px"
+  },
+  title: {
+    marginTop: "30px",
+    marginLeft: "30px"
   }
 });
 
@@ -104,19 +118,27 @@ class VideoResults extends Component {
     return (
       <React.Fragment>
       <CssBaseline />
-
+      <div className={classes.wrapper}>
+      <Paper className={classes.paper}>
+      <Typography gutterBottom>
+                      <h2 className={classes.title}>
+                        How To Use This Tool:
+                      </h2>
+                    </Typography>
       <div className={classNames(classes.layout, classes.cardGrid)}>
         <Grid container spacing={40}>
           {this.state.videos.map(video => (
             <Grid item key={video} xs={12} sm={6} md={6} lg={4} justify='center'>
-               <Card className={classes.card}> 
+               <div className={classes.card}> 
                <div className={classes.centering}>
                 <VideoCard result={video}/>
                 </div>
-              </Card> 
+              </div> 
             </Grid>
           ))}
         </Grid>
+      </div>
+      </Paper>
       </div>
     </React.Fragment>
   );

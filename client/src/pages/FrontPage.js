@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
 
 const styles = theme => ({
   main: {
@@ -15,8 +16,6 @@ const styles = theme => ({
       width: 400,
       marginLeft: "auto",
       marginRight: "auto"
-    
-  
     }
   },
   paper: {
@@ -36,6 +35,23 @@ const styles = theme => ({
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing.unit
+  },
+  titleContainer: {
+    marginTop: theme.spacing.unit * 8,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
+      .spacing.unit * 3}px`
+  },
+  title: {
+    marginTop: "20px",
+    marginBottom: "30px",
+    textAlign: "center"
+  },
+  image: {
+    height: "200px",
+
   }
 });
 
@@ -55,9 +71,15 @@ class FrontPage extends Component {
 
     return (
       <div>
-        {isAuthenticated() && <Home auth={this.props.auth} {...this.props}/>}
+        {isAuthenticated() && <Home auth={this.props.auth} {...this.props} />}
         {!isAuthenticated() && (
           <main className={classes.main}>
+            <Paper className={classes.titleContainer}>
+              <Typography gutterBottom>
+                <h2 className={classes.title}>WELCOME TO RE-TOOL</h2>
+              </Typography>
+              <img src="ReTool.png" className={classes.image}/>
+            </Paper>
             <Paper className={classes.paper}>
               <form className={classes.form}>
                 <Button

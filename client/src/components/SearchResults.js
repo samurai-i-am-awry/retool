@@ -53,7 +53,11 @@ const styles = theme => ({
     flexDirection: "column"
   },
   cardMedia: {
-    paddingTop: "56.25%" // 16:9
+    //paddingTop: "56.25%", // 16:9
+    //height: "0"
+    justifyContent: "center",
+    alignItems: "center",
+    //width: "100%"
   },
   cardContent: {
     flexGrow: 1
@@ -70,6 +74,11 @@ const styles = theme => ({
   },
   unavailable: {
     color: "red"
+  },
+  imageStyle: {
+    height: "100px",
+    margin: "auto",
+    display: "block"
   }
 });
 
@@ -107,12 +116,11 @@ class SearchResults extends Component {
                 {this.state.tools.map(card => (
                   <Grid item key={card._id} sm={6} md={4} lg={3}>
                     <Card key={card._id} className={classes.card}>
-                      <CardMedia
+                    <Link to={"/details/" + card._id}><CardMedia
                       key={card._id}
                         className={classes.cardMedia}
-                        image={card.picture_url}
                         title="Image title"
-                      />
+                      ><img src={card.picture_url} className={classes.imageStyle}/></CardMedia></Link>
                       <CardContent key={card._id} className={classes.cardContent}>
                         <Typography key={card._id} align="center" gutterBottom variant="h5" component="h2">
                           {card.manufacturer}
