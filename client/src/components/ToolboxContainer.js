@@ -57,7 +57,7 @@ class ToolboxContainer extends Component {
 
 
   loadTools = () => {
-    API.myTools("a@a.com")
+    API.myTools(this.props.user.email)
       .then(res => this.setState({ tools: res.data }))
       .catch(err => console.log(err));
   };
@@ -97,7 +97,7 @@ ToolboxContainer.propTypes = {
 
 export default withStyles(styles)(ToolboxContainer);
 
-/* 
+/*
 function ToolboxContainer(props) {
   const { classes } = props;
   return (
