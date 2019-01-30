@@ -41,6 +41,8 @@ import UserInfo from "./UserInfo";
 import ContactForm from "./ContactForm";
 import decode from "jwt-decode";
 import SearchIcon from "@material-ui/icons/Search"
+import ExitIcon from "@material-ui/icons/ExitToApp"
+import purple from '@material-ui/core/colors/purple'
 
 const drawerWidth = 240;
 
@@ -329,6 +331,9 @@ class PersistentDrawerLeft extends React.Component {
               </ListItem>
             </Link>
             <ListItem button key="logout" onClick={() => this.props.auth.logout()}>
+            <ListItemIcon>
+              <ExitIcon/>
+              </ListItemIcon>
               <ListItemText primary="Logout" />
             </ListItem>
           </List>

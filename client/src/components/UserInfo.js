@@ -42,9 +42,6 @@ function SimpleTable(props) {
 
   return (
     <main className={classes.main}>
-    <Typography variant="h3">
-                  My Profile
-    </Typography>
 
     <Paper className={classes.paper}>
       <Table className={classes.table}>
