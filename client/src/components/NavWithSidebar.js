@@ -116,14 +116,18 @@ class PersistentDrawerLeft extends React.Component {
   state = {
     open: false,
     anchorEl: null,
-    payload: {name: ""}
+    profile: {}
   };
 
-  componentDidMount() {
-    if (localStorage.getItem("id_token")) {
-      let idTokenPayload = decode(localStorage.getItem("id_token"));
-      this.setState({ payload: idTokenPayload})
-      console.log(idTokenPayload)
+  componentWillMount() {
+    this.setState({ profile: {} });
+    const { userProfile, getProfile } = this.props.auth;
+    if (!userProfile) {
+      getProfile((err, profile) => {
+        this.setState({ profile });
+      });
+    } else {
+      this.setState({ profile: userProfile });
     }
   }
 
@@ -147,10 +151,8 @@ class PersistentDrawerLeft extends React.Component {
     switch (current) {
       case "home":
         return <SearchBar key={current}/>;
-        break;
       case "results":
         return <SearchResults key={current} tool={this.props.tool} />;
-        break;
       case "details":
         return (
           <div>
@@ -158,25 +160,18 @@ class PersistentDrawerLeft extends React.Component {
             <VideoResults key={current} tool={this.props.tool} />
           </div>
         );
-        break;
       case "profile":
-        return <UserInfo user={this.state.payload} key={current}/>;
-        break;
+        return <UserInfo user={this.state.profile} key={current}/>;
       case "toolentry":
-        return <AddTool user={this.state.payload} key={current}/>;
-        break;
+        return <AddTool user={this.state.profile} key={current}/>;
       case "toolbox":
-        return <ToolboxContainer user={this.state.payload} key={current}/>;
-        break;
+        return <ToolboxContainer user={this.state.profile} key={current}/>;
       case "about":
         return <WebsiteInfo key={current}/>;
-        break;
       case "search":
         return <SearchBar key={current}/>;
-        break;
       case "contact":
         return <ContactForm key={current}/>;
-        break;
     }
   };
 
@@ -193,7 +188,6 @@ class PersistentDrawerLeft extends React.Component {
             </ListItem>
           </Link>
         );
-        break;
       case "Toolbox":
         return (
           <Link key="toolboxLink" to="/toolbox">
@@ -205,7 +199,6 @@ class PersistentDrawerLeft extends React.Component {
             </ListItem>
           </Link>
         );
-        break;
       case "Add A Tool":
         return (
           <Link key="addLink" to="/toolentry">
@@ -217,7 +210,6 @@ class PersistentDrawerLeft extends React.Component {
             </ListItem>
           </Link>
         );
-        break;
         case "Search":
         return (
           <Link key="addLink" to="/search">
@@ -229,33 +221,17 @@ class PersistentDrawerLeft extends React.Component {
             </ListItem>
           </Link>
         );
-        break;
     }
   };
 
   render() {
-    const { classes, theme } = this.props;
-    const { auth, anchorEl } = this.state;
+    const { classes, theme, auth } = this.props;
+    const { anchorEl } = this.state;
     const openSide = this.state.open;
     const openMenu = Boolean(anchorEl);
-    // const links = [
-    //   <Link to="/contact">
-    //     <ListItem button key={option}>
-    //       <ListItemIcon>
-    //         <ContactIcon />
-    //       </ListItemIcon>
-    //       <ListItemText primary={option} />
-    //     </ListItem>
-    //   </Link>,
-    //   <Link to="/about">
-    //     <ListItem button key={option}>
-    //       <ListItemIcon>
-    //         <AboutIcon />
-    //       </ListItemIcon>
-    //       <ListItemText primary={option} />
-    //     </ListItem>
-    //   </Link>
-    // ];
+
+    const { profile } = this.state;
+    const namespace = "https://mkothari:auth0:com/";
 
     return (
       <div className={classes.root}>
@@ -285,7 +261,9 @@ class PersistentDrawerLeft extends React.Component {
             </Link>
             <div>
               <Typography variant="title" color="inherit" noWrap>
-                {"Signed in as " + this.state.payload.name}
+                {"Signed in as " + profile[namespace + "firstName"] +
+                  " " +
+                  profile[namespace + "lastName"]}
               </Typography>
               <Menu
                 id="menu-appbar"
@@ -350,6 +328,9 @@ class PersistentDrawerLeft extends React.Component {
                 <ListItemText primary="About" />
               </ListItem>
             </Link>
+            <ListItem button key="logout" onClick={() => this.props.auth.logout()}>
+              <ListItemText primary="Logout" />
+            </ListItem>
           </List>
         </Drawer>
         <main
@@ -358,10 +339,9 @@ class PersistentDrawerLeft extends React.Component {
           })}
         >
           <div className={classes.drawerHeader} />
-
           {this.getMainContent(this.props.current)}
         </main>
-        
+
       </div>
     );
   }

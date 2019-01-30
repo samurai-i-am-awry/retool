@@ -90,7 +90,11 @@ export const makeMainRoutes = () => {
             path="/contact"
             render={props => <Contact auth={auth} {...props} />}
           />
-          <Route exact path="/about" component={About} />
+          <Route
+            exact
+            path="/about"
+            render={props => <About auth={auth} {...props} />}
+          />
           <Route
             path="/callback"
             render={props => {
