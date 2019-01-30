@@ -2,14 +2,9 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import ChooseTool from "./ChooseTool";
 import Paper from "@material-ui/core/Paper";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import TextField from "@material-ui/core/TextField";
-
 
 const styles = theme => ({
     paper: {
@@ -22,7 +17,7 @@ const styles = theme => ({
       marginLeft: theme.spacing.unit
     }
   });
-  
+
   class ContactForm extends React.Component {
     state = {
       tool: ""
@@ -32,10 +27,10 @@ const styles = theme => ({
         tool: toolValue.value
       });
     };
-  
+
     render() {
-      const { classes, theme } = this.props;
-  
+      const { classes } = this.props;
+
       return (
         <React.Fragment>
           <Paper className={classes.paper}>
@@ -47,8 +42,8 @@ const styles = theme => ({
               <Typography>
                 Email us at <a href="mailto:retoolteam@gmail.com"> retoolteam@gmail.com</a>
               </Typography>
-                
-              
+
+
               </Grid>
             </Grid>
           </Paper>
@@ -56,9 +51,9 @@ const styles = theme => ({
       );
     }
   }
-  
+
   ContactForm.propTypes = {
     classes: PropTypes.object.isRequired
   };
-  
+
   export default withStyles(styles)(ContactForm);

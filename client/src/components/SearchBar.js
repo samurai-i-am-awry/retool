@@ -2,9 +2,6 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import ChooseTool from "./ChooseTool";
 import Paper from "@material-ui/core/Paper";
 import PropTypes from "prop-types";
@@ -43,7 +40,7 @@ class SearchBar extends React.Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
 
     return (
 
@@ -87,7 +84,7 @@ export default withStyles(styles)(SearchBar);
     <React.Fragment>
       <Paper className={classes.paper}>
         <Typography variant="h6" gutterBottom>
-          Search 
+          Search
         </Typography>
         <Grid container spacing={24}>
         <Grid item xs={12}>

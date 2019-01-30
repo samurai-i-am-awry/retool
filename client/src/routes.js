@@ -6,7 +6,6 @@ import Auth from "./auth/Auth";
 import Callback from "./components/Callback/Callback";
 import Contact from "./pages/Contact";
 import Details from "./pages/Details";
-import history from "./history";
 import Home from "./pages/Home";
 import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";

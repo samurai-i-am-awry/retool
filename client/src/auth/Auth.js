@@ -4,8 +4,8 @@ import history from "../history";
 export default class Auth {
   userProfile;
   auth0 = new auth0.WebAuth({
-    domain: process.env.REACT_APP_AUTH0_DOMAIN,
-    clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
+    domain: process.env.REACT_APP_AUTH0_DOMAIN || 'mkothari.auth0.com',
+    clientID: process.env.REACT_APP_AUTH0_CLIENT_ID || "dtTz_Es2NA_pZfAiRO8gCh6lxnbmsYUN",
     redirectUri: process.env.REACT_APP_AUTH0_REDIRECT_URL || "http://localhost:3000/callback",
     responseType: "token id_token",
     scope: "openid profile email"

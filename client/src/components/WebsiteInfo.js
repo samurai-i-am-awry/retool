@@ -4,10 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import Developer from "./Developer";
 import classNames from "classnames";
-import Card from "@material-ui/core/Card";
 
 const developers = [
   {
@@ -139,7 +137,7 @@ function WebsiteInfo(props) {
           <Grid container spacing={40}>
             {developers.map(developer => (
               <Grid item xs={12} sm={12} md={4} lg={3} justify='center'>
-              <div className={classes.card}> 
+              <div className={classes.card}>
               <div className={classes.centering}>
                 <Developer details={developer} />
               </div>

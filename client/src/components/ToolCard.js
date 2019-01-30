@@ -3,17 +3,10 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import API from "../utils/API";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 
 const styles = theme => ({
   card: {
@@ -78,14 +71,14 @@ class ToolCard extends Component {
 
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
     return (
       <Card className={classes.card}>
         <div className={classes.details}>
           <CardContent className={classes.content}>
             <Grid item xs container spacing={16}>
             <Grid item xs>
-                <img src={this.props.details.picture_url} height="100px"/>
+                <img src={this.props.details.picture_url} alt="tool" height="100px"/>
               </Grid>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
@@ -97,18 +90,18 @@ class ToolCard extends Component {
                 <Typography gutterBottom>
                   {this.props.details.condition}
                 </Typography>
-                
+
               </Grid>
               <Grid item>
               <Typography className={classes.row}>
-                  Renter Email: 
+                  Renter Email:
                   <br/>
                   {this.state.renter}
                 </Typography>
                 </Grid>
               <Grid item>
                 <Typography className={classes.row}>
-                  Price/Hour: 
+                  Price/Hour:
                   <br/>
                   ${this.props.details.price_per_hour}
                 </Typography>
@@ -116,7 +109,7 @@ class ToolCard extends Component {
 
               <Grid item>
                 <Typography className={classes.row}>
-                  Min Rental Time: 
+                  Min Rental Time:
                   <br/>
                   {this.props.details.min_rental_time}
                 </Typography>
@@ -124,7 +117,7 @@ class ToolCard extends Component {
 
               <Grid item>
                 <Typography className={classes.row}>
-                  Deposit: 
+                  Deposit:
                   <br/>
                   ${this.props.details.deposit}
                 </Typography>
@@ -144,7 +137,7 @@ class ToolCard extends Component {
                 </Button>
                 </div>
               </Grid>
-              
+
               <Grid item>
                 <Typography
                   className={classes.remove}
