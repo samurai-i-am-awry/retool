@@ -140,6 +140,7 @@ class Signup extends Component {
                       id="password"
                       name="password"
                       label="Password"
+                      type="password"
                       fullWidth
                       autoComplete="Password"
                       onChange={this.handleInputChange}
