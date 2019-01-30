@@ -50,6 +50,8 @@ const styles = theme => ({
     display: "flex"
   },
   appBar: {
+    backgroundColor: "#6A6AA0",
+    color: "#22f4db",
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
@@ -85,6 +87,7 @@ const styles = theme => ({
     justifyContent: "flex-end"
   },
   content: {
+    color: "blue",
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
     transition: theme.transitions.create("margin", {
