@@ -1,11 +1,11 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 class SimpleMenu extends React.Component {
   state = {
-    anchorEl: null,
+    anchorEl: null
   };
 
   handleClick = event => {
@@ -22,7 +22,7 @@ class SimpleMenu extends React.Component {
     return (
       <div>
         <Button
-          aria-owns={anchorEl ? 'simple-menu' : undefined}
+          aria-owns={anchorEl ? "simple-menu" : undefined}
           aria-haspopup="true"
           onClick={this.handleClick}
         >

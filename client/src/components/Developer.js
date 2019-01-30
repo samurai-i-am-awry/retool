@@ -40,8 +40,8 @@ const styles = theme => ({
     borderRadius: "50%",
     width: "220px",
     height: "220px",
-    marginLeft: 'auto',
-    marginRight: 'auto'
+    marginLeft: "auto",
+    marginRight: "auto"
   }
 });
 
@@ -60,7 +60,7 @@ function Developer(props) {
           {props.details.name}
           <br />
           {props.details.email}
-          <br/>
+          <br />
           <a href={props.details.github}>Github</a>
         </h5>
       </Typography>

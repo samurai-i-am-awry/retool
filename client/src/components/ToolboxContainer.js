@@ -94,25 +94,3 @@ ToolboxContainer.propTypes = {
 };
 
 export default withStyles(styles)(ToolboxContainer);
-
-/*
-function ToolboxContainer(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        {dummyValues.map(card => (
-          <div className={classes.centering}>
-            <ToolCard details={card} />
-          </div>
-        ))}
-      </Paper>
-    </div>
-  );
-}
-
-ToolboxContainer.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(ToolboxContainer); */

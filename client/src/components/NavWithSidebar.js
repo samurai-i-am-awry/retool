@@ -155,7 +155,10 @@ class PersistentDrawerLeft extends React.Component {
               user={this.state.profile}
               tool={this.props.tool}
             />
-            <VideoResults key={current + "videResults"} tool={this.props.tool} />
+            <VideoResults
+              key={current + "videResults"}
+              tool={this.props.tool}
+            />
           </div>
         );
       case "profile":

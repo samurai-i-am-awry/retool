@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Card from "@material-ui/core/Card";
@@ -55,17 +55,16 @@ const styles = theme => ({
     padding: theme.spacing.unit * 6
   },
   centering: {
-    marginLeft: 'auto',
-    marginRight: 'auto'
+    marginLeft: "auto",
+    marginRight: "auto"
   }
 });
 
 class VideoResults extends Component {
-
   state = {
     videos: [],
     tool: {}
-  }
+  };
 
   findTool = () => {
     API.getTool(this.props.tool)
@@ -73,18 +72,13 @@ class VideoResults extends Component {
       .catch(err => console.log(err));
   };
 
-
-
-
   componentDidMount() {
     this.findTool();
   }
 
-  searchVideos = (type) => {
+  searchVideos = type => {
     API.getVideos("how%20to%20use%20" + type)
-      .then(res =>
-        this.setState({ videos: res.data.items.slice(0,3)})
-      )
+      .then(res => this.setState({ videos: res.data.items.slice(0, 3) }))
       .catch(err => console.log(err));
   };
 
@@ -92,24 +86,32 @@ class VideoResults extends Component {
     const { classes } = this.props;
     return (
       <React.Fragment>
-      <CssBaseline />
+        <CssBaseline />
 
-      <div className={classNames(classes.layout, classes.cardGrid)}>
-        <Grid container spacing={40}>
-          {this.state.videos.map(video => (
-            <Grid item key={video} xs={12} sm={6} md={6} lg={4} justify='center'>
-               <Card className={classes.card}>
-               <div className={classes.centering}>
-                <VideoCard result={video}/>
-                </div>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-    </React.Fragment>
-  );
-}
+        <div className={classNames(classes.layout, classes.cardGrid)}>
+          <Grid container spacing={40}>
+            {this.state.videos.map(video => (
+              <Grid
+                item
+                key={video}
+                xs={12}
+                sm={6}
+                md={6}
+                lg={4}
+                justify="center"
+              >
+                <Card className={classes.card}>
+                  <div className={classes.centering}>
+                    <VideoCard result={video} />
+                  </div>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      </React.Fragment>
+    );
+  }
 }
 
 VideoResults.propTypes = {
@@ -117,34 +119,3 @@ VideoResults.propTypes = {
 };
 
 export default withStyles(styles)(VideoResults);
-
-
-// function VideoResults(props) {
-//   const { classes } = props;
-
-//   return (
-//     <React.Fragment>
-//       <CssBaseline />
-
-//       <div className={classNames(classes.layout, classes.cardGrid)}>
-//         <Grid container spacing={40}>
-//           {cards.map(card => (
-//             <Grid item key={card} xs={12} sm={6} md={6} lg={4} justify='center'>
-//                <Card className={classes.card}>
-//                <div className={classes.centering}>
-//                 <VideoCard />
-//                 </div>
-//               </Card>
-//             </Grid>
-//           ))}
-//         </Grid>
-//       </div>
-//     </React.Fragment>
-//   );
-// }
-
-// VideoResults.propTypes = {
-//   classes: PropTypes.object.isRequired
-// };
-
-// export default withStyles(styles)(VideoResults);

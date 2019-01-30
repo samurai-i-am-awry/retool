@@ -136,12 +136,12 @@ function WebsiteInfo(props) {
         <div className={classNames(classes.layout, classes.cardGrid)}>
           <Grid container spacing={40}>
             {developers.map(developer => (
-              <Grid item xs={12} sm={12} md={4} lg={3} justify='center'>
-              <div className={classes.card}>
-              <div className={classes.centering}>
-                <Developer details={developer} />
-              </div>
-              </div>
+              <Grid item xs={12} sm={12} md={4} lg={3} justify="center">
+                <div className={classes.card}>
+                  <div className={classes.centering}>
+                    <Developer details={developer} />
+                  </div>
+                </div>
               </Grid>
             ))}
           </Grid>
