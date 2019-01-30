@@ -24,6 +24,6 @@ router
 
   router
   .route("/rent/:id")
-  .put(toolsController.update)
+  .post(toolsController.update)
 
 module.exports = router;

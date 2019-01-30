@@ -25,6 +25,16 @@ const styles = theme => ({
     margin: "auto",
     maxWidth: 1000
   },
+  paperDetails: {
+    padding: theme.spacing.unit * 2,
+    margin: "auto",
+    maxWidth: 220
+  },
+  paperDescription: {
+    padding: theme.spacing.unit * 2,
+    margin: "auto",
+    maxWidth: 400
+  },
   image: {
     width: 400,
     height: 400,
@@ -80,7 +90,14 @@ class ItemInfo extends Component {
   rentClick = (e) => {
     console.log(this.state.tool);
     API.rentTool(this.state.tool._id, true)
-    .then(res => console.log(res))
+    .then(res => this.setRenter())
+      .catch(err => console.log(err));
+  }
+
+
+  setRenter = () => {
+    API.setRenter(this.state.tool._id, this.props.user.email)
+    .then(res => this.findTool())
       .catch(err => console.log(err));
   }
 
@@ -96,7 +113,7 @@ class ItemInfo extends Component {
               <img
                 className={classes.image}
                 alt="complex"
-                src={dummyValues.image}
+                src={this.state.tool.picture_url}
               />
               {/* </ButtonBase> */}
             </Grid>
@@ -104,14 +121,40 @@ class ItemInfo extends Component {
               <Grid item xs container direction="column" spacing={16}>
                 <Grid item xs>
                   <div className={classes.text}>
+                  <Paper className={classes.paper}>
                     <Typography gutterBottom>
                       <h2 className={classes.title}>
                         {this.state.tool.tool_type}
                       </h2>
                     </Typography>
+                    
+                    <Typography gutterBottom>
+                      <h3 className={classes.title}>
+                        {this.state.tool.manufacturer}
+                      </h3>
+                    </Typography>
+                    
+                
                     <Typography gutterBottom>
                       <h5>Description: {this.state.tool.description}</h5>
+                      <br/>
                     </Typography>
+               
+                    <Paper className={classes.paperDetails}>
+                   
+                    <Typography gutterBottom>
+                      <h5>Condition: {this.state.tool.condition}</h5>
+                    </Typography>
+                    <Typography gutterBottom>
+                      <h5>Min Rental Time: {this.state.tool.min_rental_time}</h5>
+                    </Typography>
+                    <Typography gutterBottom>
+                      <h5>Price/Hour: ${this.state.tool.price_per_hour}</h5>
+                    </Typography>
+                    <Typography gutterBottom>
+                      <h5>Deposit: ${this.state.tool.deposit}</h5>
+                    </Typography>
+                    </Paper>
                     <Typography gutterBottom>
                       <h5 className={classes.contact}>
                         Contact Me: {dummyValues.email}
@@ -123,10 +166,12 @@ class ItemInfo extends Component {
                         color="primary"
                         className={classes.button}
                         onClick={this.rentClick}
+                        disabled={this.state.tool.currently_rented}
                       >
                         Rent Tool
                       </Button>
                     </div>
+                    </Paper>
                   </div>
                 </Grid>
               </Grid>

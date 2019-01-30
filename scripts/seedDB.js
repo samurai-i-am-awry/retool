@@ -18,7 +18,8 @@ const toolSeed = [
     description: "This is a tool",
     date: "test",
     owner_email: "a@a.com",
-    currently_rented: false
+    currently_rented: false,
+    renter_email: ""
   }
 ];
 
