@@ -111,6 +111,9 @@ const styles = theme => ({
   },
   accountIcon: {
     justifyContent: "space-around"
+  },
+  title: {
+    color: "#22f4db"
   }
 });
 
@@ -257,7 +260,7 @@ class PersistentDrawerLeft extends React.Component {
               <MenuIcon />
             </IconButton>
             <Link to="/home">
-              <Typography variant="title" color="inherit" align="center" noWrap>
+              <Typography variant="title" className={classes.title} align="center" noWrap>
                 Re-Tool
               </Typography>
             </Link>

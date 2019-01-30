@@ -217,7 +217,7 @@ class AddTool extends React.Component {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                required
+                
                 id="pricePerHour"
                 name="pricePerHour"
                 label="Price Per Hour"
@@ -229,7 +229,7 @@ class AddTool extends React.Component {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                required
+                
                 id="manufacturer"
                 name="manufacturer"
                 label="Manufacturer"
@@ -241,9 +241,10 @@ class AddTool extends React.Component {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                
                 id="minRentalTime"
                 name="minRentalTime"
-                label="Minimum Rental Time"
+                label="Minimum Rental Time (hr)"
                 fullWidth
                 autoComplete=""
                 value={this.state.minRentalTime}
@@ -252,19 +253,19 @@ class AddTool extends React.Component {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                required
+                
                 id="pictureURL"
                 name="pictureURL"
                 label="Picture URL"
                 fullWidth
                 autoComplete=""
-                value={this.state.picture}
+                value={this.state.pictureURL}
                 onChange={this.handlePictureChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                required
+                
                 id="deposit"
                 name="deposit"
                 label="Deposit"
@@ -276,7 +277,7 @@ class AddTool extends React.Component {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                required
+                
                 id="phone"
                 name="phone"
                 label="Phone Number"
@@ -288,7 +289,7 @@ class AddTool extends React.Component {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                required
+                
                 id="description"
                 name="description"
                 fullWidth
