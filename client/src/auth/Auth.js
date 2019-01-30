@@ -4,9 +4,9 @@ import history from "../history";
 export default class Auth {
   userProfile;
   auth0 = new auth0.WebAuth({
-    domain: "mkothari.auth0.com",
-    clientID: "dtTz_Es2NA_pZfAiRO8gCh6lxnbmsYUN",
-    redirectUri: "http://localhost:3000/callback",
+    domain: process.env.AUTH0_DOMAIN,
+    clientID: process.env.AUTH0_CLIENT_ID,
+    redirectUri: process.env.AUTH0_REDIRECT_URL || "http://localhost:3000/callback",
     responseType: "token id_token",
     scope: "openid profile email"
   });
