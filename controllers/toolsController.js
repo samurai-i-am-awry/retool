@@ -9,13 +9,15 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findByType: function(req, res) {
-    db.Tool.find({ tool_type: req.params.tool_type })
+    db.Tool
+      .find({tool_type: req.params.tool_type}) 
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findByUser: function(req, res) {
-    db.Tool.find({ owner_email: req.params.owner_email })
+    db.Tool
+      .find({owner_email: req.params.owner_email})
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
@@ -31,8 +33,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    console.log("So the update is working");
-    db.Tool.updateOne({ _id: req.params.id }, req.body)
+    console.log("So the update is working")
+    db.Tool.updateOne({_id : req.params.id}, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

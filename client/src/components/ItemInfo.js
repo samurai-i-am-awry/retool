@@ -4,8 +4,17 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import API from "../utils/API";
 import Button from "@material-ui/core/Button";
+
+const dummyValues = {
+  image: "saw.jpg",
+  name: "Nathan's Saw",
+  description:
+    "This is my saw. It is like new.  Cuts wood well. Rent me Rent me Rent me Rent me Rent me Rent me Rent me Rent me Rent me ",
+  email: "nate@gmail.com"
+};
 
 const styles = theme => ({
   root: {
@@ -78,18 +87,20 @@ class ItemInfo extends Component {
       .catch(err => console.log(err));
   };
 
-  rentClick = e => {
+  rentClick = (e) => {
     console.log(this.state.tool);
     API.rentTool(this.state.tool._id, true)
-      .then(res => this.setRenter())
+    .then(res => this.setRenter())
       .catch(err => console.log(err));
-  };
+  }
+
 
   setRenter = () => {
     API.setRenter(this.state.tool._id, this.props.user.email)
-      .then(res => this.findTool())
+    .then(res => this.findTool())
       .catch(err => console.log(err));
-  };
+  }
+
 
   render() {
     const { classes } = this.props;
@@ -110,57 +121,56 @@ class ItemInfo extends Component {
               <Grid item xs container direction="column" spacing={16}>
                 <Grid item xs>
                   <div className={classes.text}>
-                    <Paper className={classes.paper}>
-                      <Typography
-                        gutterBottom
-                        className={classes.title}
-                        variant="h4"
-                      >
+                  <Paper className={classes.paper}>
+                    <Typography gutterBottom>
+                      <h2 className={classes.title}>
                         {this.state.tool.tool_type}
-                      </Typography>
-                      <Typography
-                        gutterBottom
-                        className={classes.title}
-                        variant="h5"
-                      >
+                      </h2>
+                    </Typography>
+                    
+                    <Typography gutterBottom>
+                      <h3 className={classes.title}>
                         {this.state.tool.manufacturer}
-                      </Typography>
-                      <Typography gutterBottom variant="h6">
-                        Description: {this.state.tool.description}
-                        <br />
-                      </Typography>
-                      <Paper className={classes.paperDetails}>
-                        <Typography gutterBottom variant="h6">
-                          Condition: {this.state.tool.condition}
-                        </Typography>
-                        <Typography gutterBottom variant="h6">
-                          Min Rental Time: {this.state.tool.min_rental_time}
-                        </Typography>
-                        <Typography gutterBottom variant="h6">
-                          Price/Hour: ${this.state.tool.price_per_hour}
-                        </Typography>
-                        <Typography gutterBottom variant="h6">
-                          Deposit: ${this.state.tool.deposit}
-                        </Typography>
-                      </Paper>
-                      <Typography
-                        gutterBottom
-                        className={classes.contact}
-                        variant="h6"
-                      >
+                      </h3>
+                    </Typography>
+                    
+                
+                    <Typography gutterBottom>
+                      <h5>Description: {this.state.tool.description}</h5>
+                      <br/>
+                    </Typography>
+               
+                    <Paper className={classes.paperDetails}>
+                   
+                    <Typography gutterBottom>
+                      <h5>Condition: {this.state.tool.condition}</h5>
+                    </Typography>
+                    <Typography gutterBottom>
+                      <h5>Min Rental Time: {this.state.tool.min_rental_time}</h5>
+                    </Typography>
+                    <Typography gutterBottom>
+                      <h5>Price/Hour: ${this.state.tool.price_per_hour}</h5>
+                    </Typography>
+                    <Typography gutterBottom>
+                      <h5>Deposit: ${this.state.tool.deposit}</h5>
+                    </Typography>
+                    </Paper>
+                    <Typography gutterBottom>
+                      <h5 className={classes.contact}>
                         Contact Me: {this.state.tool.owner_email}
-                      </Typography>
-                      <div className={classes.buttons}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          className={classes.button}
-                          onClick={this.rentClick}
-                          disabled={this.state.tool.currently_rented}
-                        >
-                          Rent Tool
-                        </Button>
-                      </div>
+                      </h5>
+                    </Typography>
+                    <div className={classes.buttons}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        onClick={this.rentClick}
+                        disabled={this.state.tool.currently_rented}
+                      >
+                        Rent Tool
+                      </Button>
+                    </div>
                     </Paper>
                   </div>
                 </Grid>
@@ -178,3 +188,47 @@ ItemInfo.propTypes = {
 };
 
 export default withStyles(styles)(ItemInfo);
+
+// function ItemInfo(props) {
+//   const { classes } = props;
+//   return (
+//     <div className={classes.root}>
+//       <Paper className={classes.paper}>
+//         <Grid container spacing={16}>
+//           <Grid item className={classes.centering}>
+//             {/* <ButtonBase className={classes.image}> */}
+//               <img
+//                 className={classes.image}
+//                 alt="complex"
+//                 src={dummyValues.image}
+//               />
+//             {/* </ButtonBase> */}
+//           </Grid>
+//           <Grid item xs={12} sm container>
+//             <Grid item xs container direction="column" spacing={16}>
+//               <Grid item xs>
+//                 <div className={classes.text}>
+//                   <Typography gutterBottom>
+//                     <h2 className={classes.title}>{props.tool}</h2>
+//                   </Typography>
+//                   <Typography gutterBottom>
+//                     <h5>Description: {dummyValues.description}</h5>
+//                   </Typography>
+//                   <Typography gutterBottom>
+//                     <h5 className={classes.contact}>Contact Me: {dummyValues.email}</h5>
+//                   </Typography>
+//                 </div>
+//               </Grid>
+//             </Grid>
+//           </Grid>
+//         </Grid>
+//       </Paper>
+//     </div>
+//   );
+// }
+
+// ItemInfo.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
+
+// export default withStyles(styles)(ItemInfo);

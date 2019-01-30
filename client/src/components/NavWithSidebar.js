@@ -17,24 +17,30 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
 import AccountIcon from "@material-ui/icons/AccountCircle";
 import ToolboxIcon from "@material-ui/icons/Build";
 import AddIcon from "@material-ui/icons/Add";
 import HelpIcon from "@material-ui/icons/Help";
 import ContactIcon from "@material-ui/icons/Message";
+import Badge from "@material-ui/core/Badge";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import SearchResults from "./SearchResults";
 import ItemInfo from "./ItemInfo";
 import VideoResults from "./VideoResults";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import ToolboxContainer from "./ToolboxContainer";
 import WebsiteInfo from "./WebsiteInfo";
+import AlertIcon from "@material-ui/icons/";
 import SearchBar from "./SearchBar";
 import AddTool from "./AddTool";
 import UserInfo from "./UserInfo";
 import ContactForm from "./ContactForm";
-import SearchIcon from "@material-ui/icons/Search";
-import Home from "../pages/Home";
+import decode from "jwt-decode";
+import SearchIcon from "@material-ui/icons/Search"
 
 const drawerWidth = 240;
 
@@ -88,7 +94,7 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth
+    marginLeft: -drawerWidth,
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -144,37 +150,28 @@ class PersistentDrawerLeft extends React.Component {
   getMainContent = current => {
     switch (current) {
       case "home":
-        return <SearchBar key={current} />;
+        return <SearchBar key={current}/>;
       case "results":
         return <SearchResults key={current} tool={this.props.tool} />;
       case "details":
         return (
           <div>
-            <ItemInfo
-              key={current + "itemInfo"}
-              user={this.state.profile}
-              tool={this.props.tool}
-            />
-            <VideoResults
-              key={current + "videResults"}
-              tool={this.props.tool}
-            />
+            <ItemInfo key={current} user={this.state.payload} tool={this.props.tool} />
+            <VideoResults key={current} tool={this.props.tool} />
           </div>
         );
       case "profile":
-        return <UserInfo user={this.state.profile} key={current} />;
+        return <UserInfo user={this.state.profile} key={current}/>;
       case "toolentry":
-        return <AddTool user={this.state.profile} key={current} />;
+        return <AddTool user={this.state.profile} key={current}/>;
       case "toolbox":
-        return <ToolboxContainer user={this.state.profile} key={current} />;
+        return <ToolboxContainer user={this.state.profile} key={current}/>;
       case "about":
-        return <WebsiteInfo key={current} />;
+        return <WebsiteInfo key={current}/>;
       case "search":
-        return <SearchBar key={current} />;
+        return <SearchBar key={current}/>;
       case "contact":
-        return <ContactForm key={current} />;
-      default:
-        return <Home auth={this.props.auth} {...this.props} />;
+        return <ContactForm key={current}/>;
     }
   };
 
@@ -213,9 +210,9 @@ class PersistentDrawerLeft extends React.Component {
             </ListItem>
           </Link>
         );
-      case "Search":
+        case "Search":
         return (
-          <Link key="searchLink" to="/search">
+          <Link key="addLink" to="/search">
             <ListItem button key={option}>
               <ListItemIcon>
                 <SearchIcon />
@@ -224,13 +221,11 @@ class PersistentDrawerLeft extends React.Component {
             </ListItem>
           </Link>
         );
-      default:
-        return <Home auth={this.props.auth} {...this.props} />;
     }
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, auth } = this.props;
     const { anchorEl } = this.state;
     const openSide = this.state.open;
     const openMenu = Boolean(anchorEl);
@@ -266,8 +261,7 @@ class PersistentDrawerLeft extends React.Component {
             </Link>
             <div>
               <Typography variant="title" color="inherit" noWrap>
-                {"Signed in as " +
-                  profile[namespace + "firstName"] +
+                {"Signed in as " + profile[namespace + "firstName"] +
                   " " +
                   profile[namespace + "lastName"]}
               </Typography>
@@ -334,11 +328,7 @@ class PersistentDrawerLeft extends React.Component {
                 <ListItemText primary="About" />
               </ListItem>
             </Link>
-            <ListItem
-              button
-              key="logout"
-              onClick={() => this.props.auth.logout()}
-            >
+            <ListItem button key="logout" onClick={() => this.props.auth.logout()}>
               <ListItemText primary="Logout" />
             </ListItem>
           </List>
@@ -351,6 +341,7 @@ class PersistentDrawerLeft extends React.Component {
           <div className={classes.drawerHeader} />
           {this.getMainContent(this.props.current)}
         </main>
+
       </div>
     );
   }

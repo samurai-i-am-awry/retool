@@ -14,10 +14,16 @@ router
   .put(toolsController.update)
   .delete(toolsController.remove);
 
-router.route("/search/:tool_type").get(toolsController.findByType);
+  router
+  .route("/search/:tool_type")
+  .get(toolsController.findByType);
 
-router.route("/mytools/:owner_email").get(toolsController.findByUser);
+  router
+  .route("/mytools/:owner_email")
+  .get(toolsController.findByUser);
 
-router.route("/rent/:id").post(toolsController.update);
+  router
+  .route("/rent/:id")
+  .post(toolsController.update)
 
 module.exports = router;

@@ -22,7 +22,7 @@ const styles = theme => ({
     }
   },
   paper: {
-    backgroundColor: "#22f4db",
+    backgroundColor: "#22f4db", 
     marginTop: theme.spacing.unit * 8,
     display: "flex",
     flexDirection: "column",
@@ -81,7 +81,7 @@ class SignIn extends Component {
       <main className={classes.main}>
         <CssBaseline />
         <Paper className={classes.paper}>
-          <img className={classes.logo} alt="Re-tool Logo" src="ReTool.png" />
+          <img className={classes.logo} src="ReTool.png" />
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>

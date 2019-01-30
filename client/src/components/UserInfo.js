@@ -1,11 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 import Typography from "@material-ui/core/Typography";
 
 const styles = theme => ({
@@ -31,8 +32,9 @@ const styles = theme => ({
       marginLeft: "auto",
       marginRight: "auto"
     }
-  }
-});
+}});
+
+
 
 function SimpleTable(props) {
   const { classes, user } = props;
@@ -40,11 +42,13 @@ function SimpleTable(props) {
 
   return (
     <main className={classes.main}>
-      <Typography variant="h3">My Profile</Typography>
+    <Typography variant="h3">
+                  My Profile
+    </Typography>
 
-      <Paper className={classes.paper}>
-        <Table className={classes.table}>
-          <TableBody>
+    <Paper className={classes.paper}>
+      <Table className={classes.table}>
+        <TableBody>
             <TableRow>
               <TableCell component="th" scope="row">
                 <strong>Email:</strong>
@@ -55,37 +59,29 @@ function SimpleTable(props) {
               <TableCell component="th" scope="row">
                 <strong>Name:</strong>
               </TableCell>
-              <TableCell align="center">
-                {user[namespace + "firstName"] +
-                  " " +
-                  user[namespace + "lastName"]}
-              </TableCell>
+              <TableCell align="center">{user[namespace + "firstName"] + " " + user[namespace + "lastName"]}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
                 <strong>Zipcode:</strong>
               </TableCell>
-              <TableCell align="center">
-                {user[namespace + "zipCode"]}
-              </TableCell>
+              <TableCell align="center">{user[namespace + "zipCode"]}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
                 <strong>Phone:</strong>
               </TableCell>
-              <TableCell align="center">
-                {user[namespace + "phoneNumber"]}
-              </TableCell>
+              <TableCell align="center">{user[namespace + "phoneNumber"]}</TableCell>
             </TableRow>
-          </TableBody>
-        </Table>
-      </Paper>
+        </TableBody>
+      </Table>
+    </Paper>
     </main>
   );
 }
 
 SimpleTable.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(SimpleTable);

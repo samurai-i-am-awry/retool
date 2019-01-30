@@ -6,9 +6,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: process.env.REACT_APP_AUTH0_DOMAIN,
     clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
-    redirectUri:
-      process.env.REACT_APP_AUTH0_REDIRECT_URL ||
-      "http://localhost:3000/callback",
+    redirectUri: process.env.REACT_APP_AUTH0_REDIRECT_URL || "http://localhost:3000/callback",
     responseType: "token id_token",
     scope: "openid profile email"
   });
@@ -24,15 +22,18 @@ export default class Auth {
   }
 
   login(username, password) {
-    this.auth0.login({ realm: "re-tool", username, password }, err => {
-      if (err) {
-        console.log(err);
-        alert(
-          `Error: ${err.description}. Check the console for further details.`
-        );
-        return;
+    this.auth0.login(
+      { realm: "re-tool", username, password },
+      err => {
+        if (err) {
+          console.log(err);
+          alert(
+            `Error: ${err.description}. Check the console for further details.`
+          );
+          return;
+        }
       }
-    });
+    );
   }
 
   signup(email, password, firstName, lastName, zip, phone) {
@@ -134,5 +135,6 @@ export default class Auth {
       }
       cb(err, profile);
     });
+
   }
 }

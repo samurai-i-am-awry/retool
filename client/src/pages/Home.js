@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import NavWithSidebar from "../components/NavWithSidebar";
 import FrontPage from "./FrontPage";
 
+const styles = theme => ({
+    centering: {
+      height: "100%"
+    }
+  });
+
 class Home extends Component {
   render() {
     const { isAuthenticated } = this.props.auth;

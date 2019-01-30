@@ -1,57 +1,64 @@
+/* eslint-disable react/prop-types, react/jsx-handler-names */
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import ChooseTool from "./ChooseTool";
 import Paper from "@material-ui/core/Paper";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+import TextField from "@material-ui/core/TextField";
+
 
 const styles = theme => ({
-  paper: {
-    padding: theme.spacing.unit * 2,
-    margin: "auto",
-    maxWidth: 1000
-  },
-  button: {
-    marginTop: theme.spacing.unit * 3,
-    marginLeft: theme.spacing.unit
-  }
-});
-
-class ContactForm extends React.Component {
-  state = {
-    tool: ""
-  };
-  handleToolChange = toolValue => {
-    this.setState({
-      tool: toolValue.value
-    });
-  };
-
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <React.Fragment>
-        <Paper className={classes.paper}>
-          <Typography variant="h6" gutterBottom>
-            Contact
-          </Typography>
-          <Grid container spacing={24}>
-            <Grid item xs={12}>
+    paper: {
+      padding: theme.spacing.unit * 2,
+      margin: "auto",
+      maxWidth: 1000
+    },
+    button: {
+      marginTop: theme.spacing.unit * 3,
+      marginLeft: theme.spacing.unit
+    }
+  });
+  
+  class ContactForm extends React.Component {
+    state = {
+      tool: ""
+    };
+    handleToolChange = toolValue => {
+      this.setState({
+        tool: toolValue.value
+      });
+    };
+  
+    render() {
+      const { classes, theme } = this.props;
+  
+      return (
+        <React.Fragment>
+          <Paper className={classes.paper}>
+            <Typography variant="h6" gutterBottom>
+              Contact
+            </Typography>
+            <Grid container spacing={24}>
+              <Grid item xs={12}>
               <Typography>
-                Email us at{" "}
-                <a href="mailto:retoolteam@gmail.com"> retoolteam@gmail.com</a>
+                Email us at <a href="mailto:retoolteam@gmail.com"> retoolteam@gmail.com</a>
               </Typography>
+                
+              
+              </Grid>
             </Grid>
-          </Grid>
-        </Paper>
-      </React.Fragment>
-    );
+          </Paper>
+        </React.Fragment>
+      );
+    }
   }
-}
-
-ContactForm.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(ContactForm);
+  
+  ContactForm.propTypes = {
+    classes: PropTypes.object.isRequired
+  };
+  
+  export default withStyles(styles)(ContactForm);
