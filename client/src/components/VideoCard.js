@@ -15,7 +15,7 @@ class VideoCard extends React.Component {
     return (
         <div className={styles.centering}>
       <YouTube
-        videoId="2g811Eo7K8U"
+        videoId={this.props.result.id.videoId}
         opts={opts}
         onReady={this._onReady}
       />

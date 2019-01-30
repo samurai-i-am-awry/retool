@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import AppBar from "@material-ui/core/AppBar";
@@ -14,6 +14,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import VideoCard from "./VideoCard";
+import API from "../utils/API";
 
 const styles = theme => ({
   appBar: {
@@ -69,20 +70,48 @@ const styles = theme => ({
 
 const cards = [1, 2, 3];
 
-function VideoResults(props) {
-  const { classes } = props;
 
-  return (
-    <React.Fragment>
+class VideoResults extends Component {
+
+  state = {
+    videos: [],
+    tool: {}
+  }
+
+  findTool = () => {
+    API.getTool(this.props.tool)
+      .then(res => this.searchVideos(res.data.tool_type))
+      .catch(err => console.log(err));
+  };
+
+
+
+
+  componentDidMount() {
+    this.findTool();
+  }
+
+  searchVideos = (type) => {
+    API.getVideos("how%20to%20use%20" + type)
+      .then(res =>
+        this.setState({ videos: res.data.items.slice(0,3)})
+      )
+      .catch(err => console.log(err));
+  };
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <React.Fragment>
       <CssBaseline />
 
       <div className={classNames(classes.layout, classes.cardGrid)}>
         <Grid container spacing={40}>
-          {cards.map(card => (
-            <Grid item key={card} xs={12} sm={6} md={6} lg={4} justify='center'>
+          {this.state.videos.map(video => (
+            <Grid item key={video} xs={12} sm={6} md={6} lg={4} justify='center'>
                <Card className={classes.card}> 
                <div className={classes.centering}>
-                <VideoCard />
+                <VideoCard result={video}/>
                 </div>
               </Card> 
             </Grid>
@@ -92,9 +121,41 @@ function VideoResults(props) {
     </React.Fragment>
   );
 }
+}
 
 VideoResults.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(VideoResults);
+
+
+// function VideoResults(props) {
+//   const { classes } = props;
+
+//   return (
+//     <React.Fragment>
+//       <CssBaseline />
+
+//       <div className={classNames(classes.layout, classes.cardGrid)}>
+//         <Grid container spacing={40}>
+//           {cards.map(card => (
+//             <Grid item key={card} xs={12} sm={6} md={6} lg={4} justify='center'>
+//                <Card className={classes.card}> 
+//                <div className={classes.centering}>
+//                 <VideoCard />
+//                 </div>
+//               </Card> 
+//             </Grid>
+//           ))}
+//         </Grid>
+//       </div>
+//     </React.Fragment>
+//   );
+// }
+
+// VideoResults.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
+
+// export default withStyles(styles)(VideoResults);
